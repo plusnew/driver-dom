@@ -1,7 +1,7 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "0.6.62",
-  "description": "pl2snew driver for the browser",
+  "version": "0.6.63",
+  "description": "pl3snew driver for the browser",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
   "scripts": {

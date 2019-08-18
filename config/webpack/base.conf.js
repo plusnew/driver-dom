@@ -8,10 +8,10 @@ module.exports = {
     app: './index.ts'
   },
   output: {
-      path: path.join(__dirname, '..', '..', 'dist'),
-      filename: '[name].js',
-      library: '@plusnew/driver-dom',
-      libraryTarget: "umd",
+    path: path.join(__dirname, '..', '..', 'dist'),
+    filename: '[name].js',
+    library: '@plusnew/driver-dom',
+    libraryTarget: "umd",
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -25,17 +25,6 @@ module.exports = {
         loader: 'awesome-typescript-loader',
       },
     ]
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 0,
-      cacheGroups: {
-        default: {
-          minChunks: 1,
-        }
-      }
-    }
   },
   plugins: [
     new CleanWebpackPlugin({
