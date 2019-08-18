@@ -4,6 +4,7 @@
   "description": "plusnew driver for the browser",
   "main": "dist/index.js",
   "scripts": {
+    "prepublishOnly": "yarn run test && yarn run build",
     "build": "webpack --config config/webpack/prod.conf.js",
     "test": "karma start config/karma/base.conf.js",
     "test:karma:watch": "karma start config/karma/base.conf.js --auto-watch --no-single-run",
