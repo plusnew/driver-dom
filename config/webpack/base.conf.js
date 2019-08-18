@@ -4,13 +4,14 @@ const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
   context: path.join(__dirname, '..', '..', 'src'),
-  entry: ['./index.tsx'],
-  mode: 'development',
+  entry: {
+    app: './index.ts'
+  },
   output: {
-    path: path.join(__dirname, '..', '..', 'dist'),
-    filename: 'index.js',
-    library: 'driver-dom',
-    libraryTarget: "umd",
+      path: path.join(__dirname, '..', '..', 'dist'),
+      filename: '[name].js',
+      library: '@plusnew/driver-dom',
+      libraryTarget: "umd",
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
