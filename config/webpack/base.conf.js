@@ -8,9 +8,9 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.join(__dirname, '..', '..', 'dist'),
-    filename: 'js/[name].[hash].js',
-    chunkFilename: 'js/[name].[hash].bundle.js',
-    publicPath: '/'
+    filename: 'index.js',
+    library: 'driver-dom',
+    libraryTarget: "umd",
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
