@@ -1,11 +1,11 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "0.6.63",
+  "version": "1.0.0-alpha.0",
   "description": "pl3snew driver for the browser",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
   "scripts": {
-    "prepublishOnly": "yarn run build",
+    "prepublishOnly": "yarn run test && yarn run build",
     "build": "webpack --config config/webpack/prod.conf.js",
     "test": "karma start config/karma/base.conf.js",
     "test:karma:watch": "karma start config/karma/base.conf.js --auto-watch --no-single-run",
@@ -30,7 +30,7 @@
   "homepage": "https://github.com/plusnew/driver-dom#readme",
   "dependencies": {},
   "devDependencies": {
-    "@plusnew/core": "^0.6.58",
+    "@plusnew/core": "^1.0.0-alpha.0",
     "@types/jasmine": "^3.4.0",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -49,6 +49,6 @@
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3",
     "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6"
+    "webpack-cli": "^3.3.7"
   }
 }
