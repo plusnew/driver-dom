@@ -1,4 +1,4 @@
-import { IDriver } from '../interface';
+import { IDriver } from '@plusnew/core/dist/src/interfaces/driver';
 
 function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
   if (refChild === null) {
