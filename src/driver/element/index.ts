@@ -1,6 +1,6 @@
 import { IDriver } from '@plusnew/core/dist/src/interfaces/driver';
 import DomInstance from '@plusnew/core/dist/src/instances/types/Dom/Instance';
-import { getSpecialNamespace } from './util';
+import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent } from './util';
 
 function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
   if (refChild === null) {
@@ -9,6 +9,8 @@ function insertAfter(parentElement: Element, childElement: Element | Text, refCh
     parentElement.insertBefore(childElement, refChild.nextSibling);
   }
 }
+
+const removeValues = [false, undefined, null];
 
 const element: IDriver<Element, Text>['element'] = {
   create: (domInstance) => {
@@ -23,32 +25,40 @@ const element: IDriver<Element, Text>['element'] = {
   },
   setAttribute: (domInstance, attributeName, attributeValue) => {
     const idlAttributeName = getIDLAttributeName(attributeName);
-    domInstance.ref.setAttribute(idlAttributeName, attributeValue);
 
-    if (idlAttributeName.indexOf(':') === -1) {
-      domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
+    if (removeValues.includes(attributeValue)) {
+      element.unsetAttribute(domInstance, attributeName);
     } else {
-      const [namespacePrefix, namespacedidlAttributeName] = idlAttributeName.split(':');
-      if (namespacePrefix === 'xmlns') {
-        // @TODO add disallow changing this value
-        domInstance.renderOptions = {
-          ...domInstance.renderOptions,
-          xmlnsPrefixes: {
-            ...domInstance.renderOptions.xmlnsPrefixes,
-            [namespacedidlAttributeName]: attributeValue,
-          },
-        };
-      } else {
-        if (domInstance.renderOptions.xmlnsPrefixes && typeof domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] !== undefined) {
-          domInstance.ref.setAttributeNS(domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] as string, namespacedidlAttributeName, `${attributeValue}`);
+      if (idlAttributeName.indexOf(':') === -1) {
+        if (isEvent(attributeName)) {
+          registerEventListener(domInstance, attributeName, attributeValue);
         } else {
-          throw new Error(`The namespace prefix ${namespacePrefix} is not defined`);
+          domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
+        }
+      } else {
+        const [namespacePrefix, namespacedidlAttributeName] = idlAttributeName.split(':');
+        if (namespacePrefix === 'xmlns') {
+          // @TODO add disallow changing this value
+          domInstance.renderOptions = {
+            ...domInstance.renderOptions,
+            xmlnsPrefixes: {
+              ...domInstance.renderOptions.xmlnsPrefixes,
+              [namespacedidlAttributeName]: attributeValue,
+            },
+          };
+        } else {
+          if (domInstance.renderOptions.xmlnsPrefixes && typeof domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] !== undefined) {
+            domInstance.ref.setAttributeNS(domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] as string, namespacedidlAttributeName, `${attributeValue}`);
+          } else {
+            throw new Error(`The namespace prefix ${namespacePrefix} is not defined`);
+          }
         }
       }
     }
   },
   unsetAttribute: (domInstance, attributeName) => {
-
+    domInstance.ref.removeAttribute(attributeName);
+    // @TODO removeEventListener
   },
   moveAfterSibling: (self, previousSiblingInstance) => {
     if (self.ref.parentElement) {
@@ -64,6 +74,58 @@ const element: IDriver<Element, Text>['element'] = {
 
   },
 };
+
+function registerEventListener(instance: DomInstance<Element, Text>, eventName: string, listener: any) {
+  const eventNameWithoutPrefix = eventName.slice(2);
+  if (eventName === 'oninput') {
+    if (hasInputEvent(instance.type, instance.props)) {
+      const onchangeWrapper = (evt: Event) => {
+        debugger;
+        let preventDefault = true;
+        let changeKey: 'value' | 'checked' = 'value';
+        if (isCheckbox(instance.type, instance.props) || isRadio(instance.type, instance.props)) {
+          changeKey = 'checked';
+        }
+
+        const originalSetProp = instance.setProp;
+        instance.setProp = (key, value) => {
+          if (key === changeKey) {
+            // When value property is the same as it is before, the value doesn't need to be set
+            if ((evt.target as HTMLInputElement)[changeKey] === value) {
+              preventDefault = false;
+            } else {
+              // If the value got changed, it needs to be set
+              preventDefault = true;
+            }
+          } else {
+            // every other property, which is not the one responsible for changing the value, should call the normal setProp behaviour
+            originalSetProp.call(instance, key, value);
+          }
+        };
+
+        if (instance.props.oninput) {
+          (instance.props.oninput as EventListener)(evt);
+        }
+
+        if (preventDefault === true) {
+          ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[changeKey];
+        }
+
+        delete instance.setProp;
+      };
+
+      instance.ref.addEventListener(eventNameWithoutPrefix, onchangeWrapper);
+    } else {
+      instance.ref.addEventListener(eventNameWithoutPrefix, listener);
+    }
+  } else {
+    instance.ref.addEventListener(eventNameWithoutPrefix, listener);
+  }
+}
+
+function isEvent(attributeName: string) {
+  return attributeName.slice(0, 2) === 'on';
+}
 
 /**
  * sets a special namespace, in case self is an svg, so that children will created with correct namespace
