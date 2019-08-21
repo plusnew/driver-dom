@@ -30,7 +30,6 @@ describe('firing onchange events', () => {
     const textarea = container.childNodes[0] as HTMLTextAreaElement;
 
     textarea.value = 'bar';
-    debugger;
     const event = new CustomEvent('input', { detail: { target: textarea } });
     textarea.dispatchEvent(event);
 

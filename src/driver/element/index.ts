@@ -10,7 +10,7 @@ function insertAfter(parentElement: Element, childElement: Element | Text, refCh
   }
 }
 
-const removeValues = [false, undefined, null];
+const removeValues = [undefined, null];
 
 const element: IDriver<Element, Text>['element'] = {
   create: (domInstance) => {
@@ -33,7 +33,11 @@ const element: IDriver<Element, Text>['element'] = {
         if (isEvent(attributeName)) {
           registerEventListener(domInstance, attributeName, attributeValue);
         } else {
-          domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
+          if (attributeValue === false || attributeValue === true) {
+            (domInstance.ref as any)[attributeName] = attributeValue;
+          } else {
+            domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
+          }
         }
       } else {
         const [namespacePrefix, namespacedidlAttributeName] = idlAttributeName.split(':');
@@ -80,7 +84,6 @@ function registerEventListener(instance: DomInstance<Element, Text>, eventName: 
   if (eventName === 'oninput') {
     if (hasInputEvent(instance.type, instance.props)) {
       const onchangeWrapper = (evt: Event) => {
-        debugger;
         let preventDefault = true;
         let changeKey: 'value' | 'checked' = 'value';
         if (isCheckbox(instance.type, instance.props) || isRadio(instance.type, instance.props)) {

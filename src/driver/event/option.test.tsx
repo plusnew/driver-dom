@@ -1,7 +1,7 @@
 import plusnew, { component, store } from '@plusnew/core';
 import driver from '../index';
 
-describe('firing onchange events', () => {
+xdescribe('firing onchange events', () => {
   let container: HTMLElement;
 
   beforeEach(() => {
