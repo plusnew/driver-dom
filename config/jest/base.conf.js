@@ -11,8 +11,4 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
   moduleFileExtensions: ['tsx', 'ts', 'js'],
-  "moduleNameMapper": {
-    "\\.(png|jpg|gif)$": path.join(__dirname, 'mocks', 'file.js'),
-    "\\.(scss)$": "identity-obj-proxy"
-  }
 }

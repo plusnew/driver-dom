@@ -2,6 +2,8 @@ const config = require('./base.conf.js');
 const webpack = require('webpack');
 const path = require('path');
 
+config.mode = 'development';
+
 config.plugins.push(
   new webpack.SourceMapDevToolPlugin({
     filename: null, // if no value is provided the sourcemap is inlined
