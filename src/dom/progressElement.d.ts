@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type progressElement = htmlGlobalAttributesElement<HTMLProgressElement> & {
-  max?: number;
-  value?: string;
+  max?: number | null;
+  value?: string | null;
 };
 
 export { progressElement };

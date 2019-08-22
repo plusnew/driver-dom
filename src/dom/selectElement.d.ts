@@ -2,14 +2,14 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 import { autocomplete } from './types/autocomplete';
 
 type selectElement = htmlGlobalAttributesElement<HTMLSelectElement> & {
-  autocomplete?: autocomplete;
-  autofocus?: boolean;
-  disabled?: boolean;
-  form?: string;
-  multiple?: boolean;
-  name?: string;
-  required?: boolean;
-  size?: number;
+  autocomplete?: autocomplete | null;
+  autofocus?: boolean | null;
+  disabled?: boolean | null;
+  form?: string | null;
+  multiple?: boolean | null;
+  name?: string | null;
+  required?: boolean | null;
+  size?: number | null;
   value: string;
 };
 

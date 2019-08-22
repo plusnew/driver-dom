@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type delElement = htmlGlobalAttributesElement<HTMLModElement> & {
-  cite?: string;
-  datetime?: string;
+  cite?: string | null;
+  datetime?: string | null;
 };
 
 export { delElement };

@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type brElement = htmlGlobalAttributesElement<HTMLBRElement> & {
-  clear?: string;
+  clear?: string | null;
 };
 
 export { brElement };

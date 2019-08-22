@@ -3,12 +3,12 @@ import { crossorigin } from './types/crossorigin';
 import { preload } from './types/preload';
 
 type audioElement = htmlGlobalAttributesElement<HTMLAudioElement> & {
-  autoplay?: boolean;
-  crossorigin?: crossorigin;
-  loop?: boolean;
-  muted?: boolean;
-  preload?: preload;
-  src?: string;
+  autoplay?: boolean | null;
+  crossorigin?: crossorigin | null;
+  loop?: boolean | null;
+  muted?: boolean | null;
+  preload?: preload | null;
+  src?: string | null;
 };
 
 export { audioElement };

@@ -2,11 +2,11 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type thElement = htmlGlobalAttributesElement<HTMLElement> & {
-  abbr?: string;
-  colspan?: number;
-  headers?: string;
-  rowspan?: number;
-  scope?: "row" | "col" | "rowgroup" | "colgroup" | "auto";
+  abbr?: string | null;
+  colspan?: number | null;
+  headers?: string | null;
+  rowspan?: number | null;
+  scope?: "row" | "col" | "rowgroup" | "colgroup" | "auto" | null;
 };
 
 export { thElement };

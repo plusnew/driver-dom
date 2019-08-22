@@ -4,17 +4,17 @@ import { importance } from './types/importance';
 import { referrerpolicy } from './types/referrerpolicy';
 
 type linkElement = htmlGlobalAttributesElement<HTMLLinkElement> & {
-  as?: string;
-  crossorigin?: crossorigin;
-  href?: string;
-  hreflang?: string;
-  importance?: importance;
-  integrity?: string;
-  referrerpolicy?: referrerpolicy;
-  rel?: string;
-  sizes?: string;
-  title?: string;
-  type?: string;
+  as?: string | null;
+  crossorigin?: crossorigin | null;
+  href?: string | null;
+  hreflang?: string | null;
+  importance?: importance | null;
+  integrity?: string | null;
+  referrerpolicy?: referrerpolicy | null;
+  rel?: string | null;
+  sizes?: string | null;
+  title?: string | null;
+  type?: string | null;
 };
 
 export { linkElement };

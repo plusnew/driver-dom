@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type paramElement = htmlGlobalAttributesElement<HTMLParamElement> & {
-  name?: string;
-  value?: string;
+  name?: string | null;
+  value?: string | null;
 };
 
 export { paramElement };

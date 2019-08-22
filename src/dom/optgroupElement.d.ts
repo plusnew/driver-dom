@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type optgroupElement = htmlGlobalAttributesElement<HTMLOptGroupElement> & {
-  disabled?: boolean;
-  label?: string;
+  disabled?: boolean | null;
+  label?: string | null;
 };
 
 export { optgroupElement };

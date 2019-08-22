@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type canvasElement = htmlGlobalAttributesElement<HTMLCanvasElement> & {
-  height?: number;
-  width?: number;
+  height?: number | null;
+  width?: number | null;
 };
 
 export { canvasElement };

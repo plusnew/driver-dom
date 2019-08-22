@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type dialogElement = htmlGlobalAttributesElement<HTMLDialogElement> & {
-  open?: boolean;
+  open?: boolean | null;
 };
 
 export { dialogElement };

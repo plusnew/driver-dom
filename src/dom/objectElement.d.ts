@@ -2,14 +2,14 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type objectElement = htmlGlobalAttributesElement<HTMLObjectElement> & {
-  data?: string;
-  form?: string;
-  height?: number;
-  name?: string;
-  type?: string;
-  typemustmatch?: boolean;
-  usemap?: string;
-  width?: number;
+  data?: string | null;
+  form?: string | null;
+  height?: number | null;
+  name?: string | null;
+  type?: string | null;
+  typemustmatch?: boolean | null;
+  usemap?: string | null;
+  width?: number | null;
 };
 
 export { objectElement };

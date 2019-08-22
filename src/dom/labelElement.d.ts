@@ -2,8 +2,8 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type labelElement = htmlGlobalAttributesElement<HTMLLabelElement> & {
-  htmlFor?: string;
-  form?: string;
+  htmlFor?: string | null;
+  form?: string | null;
 };
 
 export { labelElement };

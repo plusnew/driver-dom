@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type detailsElement = htmlGlobalAttributesElement<HTMLDetailsElement> & {
-  open?: boolean;
+  open?: boolean | null;
 };
 
 export { detailsElement };

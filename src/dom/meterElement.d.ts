@@ -2,13 +2,13 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type meterElement = htmlGlobalAttributesElement<HTMLMeterElement> & {
-  value?: number;
-  min?: number;
-  max?: number;
-  low?: number;
-  high?: number;
-  optimum?: number;
-  form?: string;
+  value?: number | null;
+  min?: number | null;
+  max?: number | null;
+  low?: number | null;
+  high?: number | null;
+  optimum?: number | null;
+  form?: string | null;
 };
 
 export { meterElement };

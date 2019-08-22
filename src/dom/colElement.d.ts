@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type colElement = htmlGlobalAttributesElement<HTMLTableColElement> & {
-  span?: number;
+  span?: number | null;
 };
 
 export { colElement };

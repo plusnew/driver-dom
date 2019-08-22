@@ -3,15 +3,15 @@ import { referrerpolicy } from './types/referrerpolicy';
 
 type areaElement = htmlGlobalAttributesElement<HTMLAreaElement> & {
   alt: string;
-  coords?: string;
-  download?: string;
-  href?: string;
-  hreflang?: string;
-  ping?: string;
-  referrerpolicy?: referrerpolicy;
-  rel?: string;
-  shape?: string;
-  target?: string;
+  coords?: string | null;
+  download?: string | null;
+  href?: string | null;
+  hreflang?: string | null;
+  ping?: string | null;
+  referrerpolicy?: referrerpolicy | null;
+  rel?: string | null;
+  shape?: string | null;
+  target?: string | null;
 };
 
 export { areaElement };

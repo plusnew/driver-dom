@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type dataElement = htmlGlobalAttributesElement<HTMLDataElement> & {
-  value?: string;
+  value?: string | null;
 };
 
 export { dataElement };

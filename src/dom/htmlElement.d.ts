@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type htmlElement = htmlGlobalAttributesElement<HTMLHtmlElement> & {
-  xmlns?: string;
+  
 };
 
 export { htmlElement };

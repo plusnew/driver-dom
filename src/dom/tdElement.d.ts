@@ -2,9 +2,9 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type tdElement = htmlGlobalAttributesElement<HTMLElement> & {
-  colspan?: number;
-  headers?: string;
-  rowspan?: number;
+  colspan?: number | null;
+  headers?: string | null;
+  rowspan?: number | null;
 };
 
 export { tdElement };

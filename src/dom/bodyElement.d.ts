@@ -2,24 +2,24 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type bodyElement = htmlGlobalAttributesElement<HTMLBodyElement> & {
-  onafterprint?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onbeforeprint?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onbeforeunload?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onblur?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onerror?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onfocus?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onhashchange?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onlanguagechange?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onload?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onmessage?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onoffline?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  ononline?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onpopstate?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onredo?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onresize?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onstorage?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onundo?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
-  onunload?: "(event: Event & { currentTarget: HTMLBodyElement }) => void";
+  onafterprint?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onbeforeprint?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onbeforeunload?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onblur?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onerror?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onfocus?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onhashchange?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onlanguagechange?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onload?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onmessage?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onoffline?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  ononline?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onpopstate?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onredo?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onresize?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onstorage?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onundo?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
+  onunload?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
 };
 
 export { bodyElement };

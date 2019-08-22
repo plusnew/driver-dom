@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type timeElement = htmlGlobalAttributesElement<HTMLTimeElement> & {
-  datetime?: string;
+  datetime?: string | null;
 };
 
 export { timeElement };

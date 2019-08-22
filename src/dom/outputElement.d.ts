@@ -2,9 +2,9 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type outputElement = htmlGlobalAttributesElement<HTMLOutputElement> & {
-  for?: string;
-  form?: string;
-  name?: string;
+  for?: string | null;
+  form?: string | null;
+  name?: string | null;
 };
 
 export { outputElement };

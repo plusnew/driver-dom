@@ -2,10 +2,10 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type trackElement = htmlGlobalAttributesElement<HTMLTrackElement> & {
-  default?: boolean;
-  kind?: "subtitles" | "captions" | "descriptions" | "chapters" | "metadata";
+  default?: boolean | null;
+  kind?: "subtitles" | "captions" | "descriptions" | "chapters" | "metadata" | null;
   src: string;
-  srclang?: string;
+  srclang?: string | null;
 };
 
 export { trackElement };

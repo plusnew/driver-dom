@@ -26,7 +26,7 @@ describe('dom handling', () => {
     const Component = component(
       'Component',
       () =>
-        <div className="foo" />,
+        <div class="foo" />,
     );
     plusnew.render(<Component />, { driver: driver(container) });
 

@@ -4,18 +4,18 @@ import { importance } from './types/importance';
 import { referrerpolicy } from './types/referrerpolicy';
 
 type imgElement = htmlGlobalAttributesElement<HTMLImageElement> & {
-  alt?: string;
-  crossorigin?: crossorigin;
-  decoding?: "sync" | "async" | "auto";
-  height?: number;
-  importance?: importance;
-  ismap?: boolean;
-  referrerpolicy?: referrerpolicy;
-  sizes?: string;
+  alt?: string | null;
+  crossorigin?: crossorigin | null;
+  decoding?: "sync" | "async" | "auto" | null;
+  height?: number | null;
+  importance?: importance | null;
+  ismap?: boolean | null;
+  referrerpolicy?: referrerpolicy | null;
+  sizes?: string | null;
   src: string;
-  srcset?: string;
-  width?: number;
-  usemap?: string;
+  srcset?: string | null;
+  width?: number | null;
+  usemap?: string | null;
 };
 
 export { imgElement };

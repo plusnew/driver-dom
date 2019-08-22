@@ -2,9 +2,9 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type fieldsetElement = htmlGlobalAttributesElement<HTMLFieldSetElement> & {
-  disabled?: boolean;
-  form?: string;
-  name?: string;
+  disabled?: boolean | null;
+  form?: string | null;
+  name?: string | null;
 };
 
 export { fieldsetElement };

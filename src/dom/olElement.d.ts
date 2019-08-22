@@ -2,9 +2,9 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type olElement = htmlGlobalAttributesElement<HTMLOListElement> & {
-  reversed?: boolean;
-  start?: number;
-  type?: "a" | "A" | "i" | "I" | "1";
+  reversed?: boolean | null;
+  start?: number | null;
+  type?: "a" | "A" | "i" | "I" | "1" | null;
 };
 
 export { olElement };

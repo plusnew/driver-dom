@@ -2,11 +2,11 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type styleElement = htmlGlobalAttributesElement<HTMLStyleElement> & {
-  type?: string;
-  media?: string;
-  content?: string;
-  nonce?: string;
-  title?: string;
+  type?: string | null;
+  media?: string | null;
+  content?: string | null;
+  nonce?: string | null;
+  title?: string | null;
 };
 
 export { styleElement };

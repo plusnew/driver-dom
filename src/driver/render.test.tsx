@@ -17,7 +17,7 @@ describe('rendering the elements', () => {
   it('check if element is inserted', () => {
     const Component = component(
       'Component',
-      (Props: Props<{}>) => <div className="foo" />,
+      (Props: Props<{}>) => <div class="foo" />,
     );
 
     plusnew.render(<Component />, { driver: driver(container) });
@@ -33,8 +33,8 @@ describe('rendering the elements', () => {
       'Component',
       () => (
         <div>
-          <div className="foo" />
-          <span className="bar" />
+          <div class="foo" />
+          <span class="bar" />
         </div>
       ),
     );
@@ -55,8 +55,8 @@ describe('rendering the elements', () => {
     const Component = component(
       'Component',
       () => (
-        <div className="foo">
-          <span className="bar" />
+        <div class="foo">
+          <span class="bar" />
         </div>
       ),
     );
@@ -94,7 +94,7 @@ describe('rendering the elements', () => {
   it('check if textnode is created', () => {
     const Component = component(
       'Component',
-      (Props: Props<{}>) => <div className="foo">bar</div>,
+      (Props: Props<{}>) => <div class="foo">bar</div>,
     );
     plusnew.render(<Component />, { driver: driver(container) });
 
@@ -208,7 +208,7 @@ describe('rendering the elements', () => {
       'Component',
       () =>
         <local.Observer>{localState =>
-          localState ? <div className="foo" /> : <div />
+          localState ? <div class="foo" /> : <div />
         }</local.Observer>,
     );
 

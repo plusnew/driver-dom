@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type liElement = htmlGlobalAttributesElement<HTMLLIElement> & {
-  value?: number;
+  value?: number | null;
 };
 
 export { liElement };

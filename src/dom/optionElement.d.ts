@@ -2,9 +2,10 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type optionElement = htmlGlobalAttributesElement<HTMLOptionElement> & {
-  disabled?: boolean;
-  label?: string;
-  value?: string;
+  disabled?: boolean | null;
+  label?: string | null;
+  selected?: boolean | null;
+  value?: string | null;
 };
 
 export { optionElement };

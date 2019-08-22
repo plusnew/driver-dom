@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type mapElement = htmlGlobalAttributesElement<HTMLMapElement> & {
-  name?: string;
+  name?: string | null;
 };
 
 export { mapElement };

@@ -166,7 +166,6 @@ function setNamespace(instance: DomInstance<Element, Text>) {
 
 const propertyToIDLMapping = {
   acceptCharset: 'accept-charset',
-  className: 'class',
   htmlFor: 'for',
   httpEquiv: 'http-equiv',
 };

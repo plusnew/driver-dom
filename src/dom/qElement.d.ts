@@ -2,7 +2,7 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type qElement = htmlGlobalAttributesElement<HTMLQuoteElement> & {
-  cite?: string;
+  cite?: string | null;
 };
 
 export { qElement };

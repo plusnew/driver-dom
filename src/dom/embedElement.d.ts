@@ -2,10 +2,10 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 
 
 type embedElement = htmlGlobalAttributesElement<HTMLEmbedElement> & {
-  height?: number;
-  src?: string;
-  type?: string;
-  width?: number;
+  height?: number | null;
+  src?: string | null;
+  type?: string | null;
+  width?: number | null;
 };
 
 export { embedElement };
