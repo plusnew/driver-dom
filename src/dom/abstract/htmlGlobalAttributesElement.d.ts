@@ -1,6 +1,6 @@
 
 import { truefalse } from './../types/truefalse';
-import { ApplicationElement } from '@plusnew/core';
+import { ApplicationElement } from '@plusnew/core/dist/src/interfaces/component';
 
 type htmlGlobalAttributesElement<currentElement> = {
   key?: number | string;
