@@ -61,8 +61,11 @@ const element: IDriver<Element, Text>['element'] = {
     }
   },
   unsetAttribute: (domInstance, attributeName) => {
-    domInstance.ref.removeAttribute(attributeName);
-    // @TODO removeEventListener
+    if (isEvent(attributeName)) {
+      (domInstance.ref as any)[attributeName] = null;
+    } else {
+      domInstance.ref.removeAttribute(attributeName);
+    }
   },
   moveAfterSibling: (self, previousSiblingInstance) => {
     if (self.ref.parentElement) {
@@ -83,11 +86,10 @@ const element: IDriver<Element, Text>['element'] = {
 };
 
 function registerEventListener(instance: DomInstance<Element, Text>, eventName: string, listener: any) {
-  const eventNameWithoutPrefix = eventName.slice(2);
 
   // Oninput already gets ommitted, because this is a special case handled by registerInputListener
   if ((eventName === 'oninput' && hasInputEvent(instance.type, instance.props)) === false) {
-    instance.ref.addEventListener(eventNameWithoutPrefix, listener);
+    (instance.ref as any)[eventName] = listener;
   }
 }
 
@@ -126,7 +128,7 @@ function registerInputWatcher(instance: DomInstance<Element, Text>) {
     delete instance.setProp;
   };
 
-  instance.ref.addEventListener('input', onchangeWrapper);
+  (instance.ref as HTMLInputElement).oninput = onchangeWrapper;
 }
 
 function isEvent(attributeName: string) {
