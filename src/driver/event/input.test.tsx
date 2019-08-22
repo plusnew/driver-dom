@@ -124,7 +124,7 @@ describe('firing input events', () => {
     expect(local.getState()).toBe(false);
   });
 
-  xit('checkbox value persists when state isnt changed', () => {
+  it('checkbox value persists when state isnt changed, even without listener', () => {
     const Component = component(
       'Component',
       () => <input checked={false} type="checkbox" />,

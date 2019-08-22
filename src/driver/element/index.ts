@@ -75,55 +75,58 @@ const element: IDriver<Element, Text>['element'] = {
     insertAfter(parentInstance.ref, childInstance.ref, previousSiblingInstance && previousSiblingInstance.ref);
   },
   elementDidMountHook: (domInstance) => {
-
+    if (hasInputEvent(domInstance.type, domInstance.props)) {
+      // WHen an element has input-capabilities, these need to be watched, so that the value of that element can be resettted if needed
+      registerInputWatcher(domInstance);
+    }
   },
 };
 
 function registerEventListener(instance: DomInstance<Element, Text>, eventName: string, listener: any) {
   const eventNameWithoutPrefix = eventName.slice(2);
-  if (eventName === 'oninput') {
-    if (hasInputEvent(instance.type, instance.props)) {
-      const onchangeWrapper = (evt: Event) => {
-        let preventDefault = true;
-        let changeKey: 'value' | 'checked' = 'value';
-        if (isCheckbox(instance.type, instance.props) || isRadio(instance.type, instance.props)) {
-          changeKey = 'checked';
-        }
 
-        const originalSetProp = instance.setProp;
-        instance.setProp = (key, value) => {
-          if (key === changeKey) {
-            // When value property is the same as it is before, the value doesn't need to be set
-            if ((evt.target as HTMLInputElement)[changeKey] === value) {
-              preventDefault = false;
-            } else {
-              // If the value got changed, it needs to be set
-              preventDefault = true;
-            }
-          } else {
-            // every other property, which is not the one responsible for changing the value, should call the normal setProp behaviour
-            originalSetProp.call(instance, key, value);
-          }
-        };
-
-        if (instance.props.oninput) {
-          (instance.props.oninput as EventListener)(evt);
-        }
-
-        if (preventDefault === true) {
-          ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[changeKey];
-        }
-
-        delete instance.setProp;
-      };
-
-      instance.ref.addEventListener(eventNameWithoutPrefix, onchangeWrapper);
-    } else {
-      instance.ref.addEventListener(eventNameWithoutPrefix, listener);
-    }
-  } else {
+  // Oninput already gets ommitted, because this is a special case handled by registerInputListener
+  if ((eventName === 'oninput' && hasInputEvent(instance.type, instance.props)) === false) {
     instance.ref.addEventListener(eventNameWithoutPrefix, listener);
   }
+}
+
+function registerInputWatcher(instance: DomInstance<Element, Text>) {
+  const onchangeWrapper = (evt: Event) => {
+    let preventDefault = true;
+    let changeKey: 'value' | 'checked' = 'value';
+    if (isCheckbox(instance.type, instance.props) || isRadio(instance.type, instance.props)) {
+      changeKey = 'checked';
+    }
+
+    const originalSetProp = instance.setProp;
+    instance.setProp = (key, value) => {
+      if (key === changeKey) {
+        // When value property is the same as it is before, the value doesn't need to be set
+        if ((evt.target as HTMLInputElement)[changeKey] === value) {
+          preventDefault = false;
+        } else {
+          // If the value got changed, it needs to be set
+          preventDefault = true;
+        }
+      } else {
+        // every other property, which is not the one responsible for changing the value, should call the normal setProp behaviour
+        originalSetProp.call(instance, key, value);
+      }
+    };
+
+    if (instance.props.oninput) {
+      (instance.props.oninput as EventListener)(evt);
+    }
+
+    if (preventDefault === true) {
+      ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[changeKey];
+    }
+
+    delete instance.setProp;
+  };
+
+  instance.ref.addEventListener('input', onchangeWrapper);
 }
 
 function isEvent(attributeName: string) {
