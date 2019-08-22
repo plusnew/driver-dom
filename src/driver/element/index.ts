@@ -37,6 +37,10 @@ const element: IDriver<Element, Text>['element'] = {
             (domInstance.ref as any)[attributeName] = attributeValue;
           } else if (attributeName === 'style') {
             domInstance.ref.setAttribute('style', getStylePropsAsAttribute(attributeValue));
+          } else if (setAttributeAsProperty(attributeName)) {
+            // Properties like value or checked, need to be set as a property, not as an attribute
+            // If these would be set as an attribute, the value would be ignored
+            (domInstance.ref as any)[attributeName] = attributeValue;
           } else {
             domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
           }
@@ -172,6 +176,10 @@ function getIDLAttributeName(propertyName: string): string {
     return (propertyToIDLMapping as any)[propertyName];
   }
   return propertyName;
+}
+
+function setAttributeAsProperty(keyName: string): keyName is 'checked' | 'value' {
+  return keyName === 'value' || keyName === 'checked';
 }
 
 function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string {

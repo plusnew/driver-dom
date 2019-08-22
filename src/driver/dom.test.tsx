@@ -169,7 +169,7 @@ describe('dom handling', () => {
     expect((container.childNodes[0] as HTMLDivElement).getAttribute('key')).toBe(null);
   });
 
-  xit('input oninput', () => {
+  it('input oninput', () => {
     const local = store('foo', (state, action: string) => action);
 
     const Component = component(
@@ -199,6 +199,7 @@ describe('dom handling', () => {
 
     expect(local.getState()).toBe('anothermep');
 
+    debugger;
     local.dispatch('completly other value');
 
     expect(target.value).toBe('completly other value');
