@@ -232,7 +232,7 @@ describe('rendering the elements', () => {
 
     const NestedComponent = component(
       'NestedComponent',
-      (Props: Props<{key: number}>) =>
+      (Props: Props<{ key: number }>) =>
         <Props>{props =>
           <div>{props.key}</div>
         }</Props>,
@@ -247,10 +247,10 @@ describe('rendering the elements', () => {
             <NestedComponent key={2} />,
             <NestedComponent key={3} />,
           ] : [
-            <NestedComponent key={3} />,
-            <NestedComponent key={2} />,
-            <NestedComponent key={1} />,
-          ]
+              <NestedComponent key={3} />,
+              <NestedComponent key={2} />,
+              <NestedComponent key={1} />,
+            ]
         }</local.Observer>,
     );
 
@@ -276,12 +276,12 @@ describe('rendering the elements', () => {
     expect((third as HTMLElement).textContent).toBe('3');
   });
 
-  it('move elements', () => {
+  it('move text', () => {
     const local = store(true);
 
     const NestedComponent = component(
       'NestedComponent',
-      (Props: Props<{key: number}>) =>
+      (Props: Props<{ key: number }>) =>
         <Props>{props =>
           props.key
         }</Props>,
@@ -296,10 +296,10 @@ describe('rendering the elements', () => {
             <NestedComponent key={2} />,
             <NestedComponent key={3} />,
           ] : [
-            <NestedComponent key={3} />,
-            <NestedComponent key={2} />,
-            <NestedComponent key={1} />,
-          ]
+              <NestedComponent key={3} />,
+              <NestedComponent key={2} />,
+              <NestedComponent key={1} />,
+            ]
         }</local.Observer>,
     );
 
@@ -320,5 +320,49 @@ describe('rendering the elements', () => {
     expect((first as HTMLElement).textContent).toBe('1');
     expect((second as HTMLElement).textContent).toBe('2');
     expect((third as HTMLElement).textContent).toBe('3');
+  });
+
+  it('update text', () => {
+    const local = store('foo');
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          localState
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    expect((container.childNodes[0] as Text).textContent).toBe('foo');
+
+    local.dispatch('bar');
+
+    expect((container.childNodes[0] as Text).textContent).toBe('bar');
+  });
+
+  it('removing text', () => {
+    const local = store(false);
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          localState && 'foo'
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    expect(container.childNodes.length).toBe(0);
+
+    local.dispatch(true);
+
+    expect((container.childNodes[0] as Text).textContent).toBe('foo');
+
+    local.dispatch(false);
+
+    expect(container.childNodes.length).toBe(0);
   });
 });

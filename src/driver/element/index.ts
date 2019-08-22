@@ -34,7 +34,6 @@ const element: IDriver<Element, Text>['element'] = {
           registerEventListener(domInstance, attributeName, attributeValue);
         } else {
           if (attributeValue === false || attributeValue === true) {
-            debugger;
             (domInstance.ref as any)[attributeName] = attributeValue;
           } else {
             domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
