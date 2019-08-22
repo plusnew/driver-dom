@@ -226,4 +226,99 @@ describe('rendering the elements', () => {
 
     expect((container.childNodes[0] as HTMLButtonElement).className).toBe('');
   });
+
+  it('move elements', () => {
+    const local = store(true);
+
+    const NestedComponent = component(
+      'NestedComponent',
+      (Props: Props<{key: number}>) =>
+        <Props>{props =>
+          <div>{props.key}</div>
+        }</Props>,
+    );
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          localState ? [
+            <NestedComponent key={1} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={3} />,
+          ] : [
+            <NestedComponent key={3} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={1} />,
+          ]
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    const [first, second, third] = container.childNodes;
+    expect(container.childNodes.length).toBe(3);
+    expect((first as HTMLElement).tagName).toBe('DIV');
+    expect((first as HTMLElement).textContent).toBe('1');
+    expect((second as HTMLElement).tagName).toBe('DIV');
+    expect((second as HTMLElement).textContent).toBe('2');
+    expect((third as HTMLElement).tagName).toBe('DIV');
+    expect((third as HTMLElement).textContent).toBe('3');
+
+    local.dispatch(false);
+
+    expect(container.childNodes.length).toBe(3);
+    expect(container.childNodes[0]).toBe(third);
+    expect(container.childNodes[1]).toBe(second);
+    expect(container.childNodes[2]).toBe(first);
+    expect((first as HTMLElement).textContent).toBe('1');
+    expect((second as HTMLElement).textContent).toBe('2');
+    expect((third as HTMLElement).textContent).toBe('3');
+  });
+
+  it('move elements', () => {
+    const local = store(true);
+
+    const NestedComponent = component(
+      'NestedComponent',
+      (Props: Props<{key: number}>) =>
+        <Props>{props =>
+          props.key
+        }</Props>,
+    );
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          localState ? [
+            <NestedComponent key={1} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={3} />,
+          ] : [
+            <NestedComponent key={3} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={1} />,
+          ]
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    const [first, second, third] = container.childNodes;
+    expect(container.childNodes.length).toBe(3);
+    expect((first as Text).textContent).toBe('1');
+    expect((second as Text).textContent).toBe('2');
+    expect((third as Text).textContent).toBe('3');
+
+    local.dispatch(false);
+
+    expect(container.childNodes.length).toBe(3);
+    expect(container.childNodes[0]).toBe(third);
+    expect(container.childNodes[1]).toBe(second);
+    expect(container.childNodes[2]).toBe(first);
+    expect((first as HTMLElement).textContent).toBe('1');
+    expect((second as HTMLElement).textContent).toBe('2');
+    expect((third as HTMLElement).textContent).toBe('3');
+  });
 });
