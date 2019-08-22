@@ -35,6 +35,8 @@ const element: IDriver<Element, Text>['element'] = {
         } else {
           if (attributeValue === false || attributeValue === true) {
             (domInstance.ref as any)[attributeName] = attributeValue;
+          } else if (attributeName === 'style') {
+            domInstance.ref.setAttribute('style', getStylePropsAsAttribute(attributeValue));
           } else {
             domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
           }
@@ -83,6 +85,14 @@ const element: IDriver<Element, Text>['element'] = {
     if (hasInputEvent(domInstance.type, domInstance.props)) {
       // WHen an element has input-capabilities, these need to be watched, so that the value of that element can be resettted if needed
       registerInputWatcher(domInstance);
+    }
+
+    /**
+     * safari is the only browser creating a focus on elements created after time
+     * all the other browsers don't do that, that's why this functions sets it manually, after the element is inserted in the dom
+     */
+    if ('autofocus' in domInstance.props && domInstance.props.autofocus === true && domInstance.ref instanceof HTMLInputElement) {
+      domInstance.ref.focus();
     }
   },
 };
@@ -164,17 +174,9 @@ function getIDLAttributeName(propertyName: string): string {
   return propertyName;
 }
 
-//
-// /**
-//  * safari is the only browser creating a focus on elements created after time
-//  * all the other browsers don't do that, that's why this functions sets it manually, after the element is inserted in the dom
-//  */
-// function setAutofocusIfNeeded(instance: DomInstance<Element, Text>) {
-//   if (instance.props.autofocus === true) {
-//     (instance.ref as any).focus();
-//   }
-// }
-//
+function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string {
+  return Object.keys(style).reduce((styleString, styleIndex) => `${styleString}${styleIndex}:${style[styleIndex]};`, '');
+}
 // /**
 //  * sets the value of an OPTION-Element
 //  * looks for the parent select element to set the selected property

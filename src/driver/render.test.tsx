@@ -247,10 +247,10 @@ describe('rendering the elements', () => {
             <NestedComponent key={2} />,
             <NestedComponent key={3} />,
           ] : [
-              <NestedComponent key={3} />,
-              <NestedComponent key={2} />,
-              <NestedComponent key={1} />,
-            ]
+            <NestedComponent key={3} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={1} />,
+          ]
         }</local.Observer>,
     );
 
@@ -296,10 +296,10 @@ describe('rendering the elements', () => {
             <NestedComponent key={2} />,
             <NestedComponent key={3} />,
           ] : [
-              <NestedComponent key={3} />,
-              <NestedComponent key={2} />,
-              <NestedComponent key={1} />,
-            ]
+            <NestedComponent key={3} />,
+            <NestedComponent key={2} />,
+            <NestedComponent key={1} />,
+          ]
         }</local.Observer>,
     );
 

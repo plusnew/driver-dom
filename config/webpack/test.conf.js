@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 config.mode = 'development';
+config.devtool = 'source-map-inline';
 
 config.plugins.push(
   new webpack.SourceMapDevToolPlugin({
