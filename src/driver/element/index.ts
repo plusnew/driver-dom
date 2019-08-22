@@ -34,6 +34,7 @@ const element: IDriver<Element, Text>['element'] = {
           registerEventListener(domInstance, attributeName, attributeValue);
         } else {
           if (attributeValue === false || attributeValue === true) {
+            debugger;
             (domInstance.ref as any)[attributeName] = attributeValue;
           } else {
             domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
@@ -64,7 +65,9 @@ const element: IDriver<Element, Text>['element'] = {
     if (isEvent(attributeName)) {
       (domInstance.ref as any)[attributeName] = null;
     } else {
-      domInstance.ref.removeAttribute(attributeName);
+      const idlAttributeName = getIDLAttributeName(attributeName);
+
+      domInstance.ref.removeAttribute(idlAttributeName);
     }
   },
   moveAfterSibling: (self, previousSiblingInstance) => {

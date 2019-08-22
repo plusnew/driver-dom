@@ -174,4 +174,56 @@ describe('rendering the elements', () => {
     expect((container.childNodes[1] as HTMLElement).tagName).toBe('CONTENT');
     expect((container.childNodes[2] as HTMLElement).tagName).toBe('FOOTER');
   });
+
+  it('boolean attribute', () => {
+    const local = store(false);
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          <button disabled={localState} />
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    expect(container.childNodes.length).toBe(1);
+    expect((container.childNodes[0] as HTMLButtonElement).tagName).toBe('BUTTON');
+    expect((container.childNodes[0] as HTMLButtonElement).disabled).toBe(false);
+
+    local.dispatch(true);
+
+    expect((container.childNodes[0] as HTMLButtonElement).disabled).toBe(true);
+
+    local.dispatch(false);
+
+    expect((container.childNodes[0] as HTMLButtonElement).disabled).toBe(false);
+  });
+
+  it('deleting attribute', () => {
+    const local = store(false);
+
+    const MainComponent = component(
+      'Component',
+      () =>
+        <local.Observer>{localState =>
+          localState ? <div className="foo" /> : <div />
+        }</local.Observer>,
+    );
+
+    plusnew.render(<MainComponent />, { driver: driver(container) });
+
+    expect(container.childNodes.length).toBe(1);
+    expect((container.childNodes[0] as HTMLButtonElement).tagName).toBe('DIV');
+    expect((container.childNodes[0] as HTMLButtonElement).className).toBe('');
+
+    local.dispatch(true);
+
+    expect((container.childNodes[0] as HTMLButtonElement).className).toBe('foo');
+
+    local.dispatch(false);
+
+    expect((container.childNodes[0] as HTMLButtonElement).className).toBe('');
+  });
 });
