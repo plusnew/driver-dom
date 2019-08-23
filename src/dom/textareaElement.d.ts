@@ -1,8 +1,6 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type textareaElement = htmlGlobalAttributesElement<HTMLTextAreaElement> & {
-  autocomplete?: "on" | "off" | null;
+  autocomplete?: 'on' | 'off' | null;
   autofocus?: boolean | null;
   cols?: number | null;
   disabled?: boolean | null;
@@ -14,9 +12,9 @@ type textareaElement = htmlGlobalAttributesElement<HTMLTextAreaElement> & {
   readonly?: boolean | null;
   required?: boolean | null;
   rows?: number | null;
-  spellcheck?: "true" | "default" | "false" | null;
-  wrap?: "hard" | "soft" | null;
   value?: string | null;
+  spellcheck?: 'true' | 'default' | 'false' | null;
+  wrap?: 'hard' | 'soft' | null;
 };
 
 export { textareaElement };

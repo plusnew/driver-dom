@@ -1,6 +1,6 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "description": "plusnew driver for the browser",
   "main": "dist/app.js",
   "types": "dist/app.d.ts",
@@ -34,6 +34,7 @@
     "@types/jasmine": "^3.4.0",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine-core": "^3.4.0",
     "jest": "^24.9.0",

@@ -1,6 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type bodyElement = htmlGlobalAttributesElement<HTMLBodyElement> & {
   onafterprint?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;
   onbeforeprint?: ((event: Event & { currentTarget: HTMLBodyElement }) => void) | null;

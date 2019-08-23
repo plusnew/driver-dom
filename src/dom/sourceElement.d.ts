@@ -1,6 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type sourceElement = htmlGlobalAttributesElement<HTMLSourceElement> & {
   sizes?: string | null;
   src?: string | null;

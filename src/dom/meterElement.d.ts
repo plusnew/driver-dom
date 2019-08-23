@@ -1,6 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type meterElement = htmlGlobalAttributesElement<HTMLMeterElement> & {
   value?: number | null;
   min?: number | null;

@@ -1,6 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type objectElement = htmlGlobalAttributesElement<HTMLObjectElement> & {
   data?: string | null;
   form?: string | null;

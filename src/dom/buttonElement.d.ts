@@ -1,7 +1,6 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
 import { enctype } from './types/enctype';
 import { target } from './types/target';
-
 type buttonElement = htmlGlobalAttributesElement<HTMLButtonElement> & {
   autofocus?: boolean | null;
   disabled?: boolean | null;
@@ -11,7 +10,7 @@ type buttonElement = htmlGlobalAttributesElement<HTMLButtonElement> & {
   formnovalidate?: boolean | null;
   formtarget?: target | null;
   name?: string | null;
-  type?: "button" | "reset" | "submit" | null;
+  type?: 'button' | 'reset' | 'submit' | null;
   value?: string | null;
 };
 

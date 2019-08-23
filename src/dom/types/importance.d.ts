@@ -1,1 +1,1 @@
-export type importance = "auto" | "high" | "low"
+export type importance = 'auto' | 'high' | 'low';

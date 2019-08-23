@@ -2,11 +2,10 @@ import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElem
 import { enctype } from './types/enctype';
 import { method } from './types/method';
 import { target } from './types/target';
-
 type formElement = htmlGlobalAttributesElement<HTMLFormElement> & {
   acceptCharset?: string | null;
   action?: string | null;
-  autocomplete?: "on" | "off" | null;
+  autocomplete?: 'on' | 'off' | null;
   enctype?: enctype | null;
   method?: method | null;
   name?: string | null;

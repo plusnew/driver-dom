@@ -1,8 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
-type pElement = htmlGlobalAttributesElement<HTMLParagraphElement> & {
-  
-};
+type pElement = htmlGlobalAttributesElement<HTMLParagraphElement>;
 
 export { pElement };

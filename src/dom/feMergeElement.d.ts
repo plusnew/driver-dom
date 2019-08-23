@@ -1,8 +1,4 @@
 import { svgCoreAttributesElement } from './abstract/svgCoreAttributesElement';
-
-
-type feMergeElement = svgCoreAttributesElement<SVGElement> & {
-  
-};
+type feMergeElement = svgCoreAttributesElement<SVGElement>;
 
 export { feMergeElement };

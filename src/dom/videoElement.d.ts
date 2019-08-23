@@ -1,7 +1,6 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
 import { crossorigin } from './types/crossorigin';
 import { preload } from './types/preload';
-
 type videoElement = htmlGlobalAttributesElement<HTMLVideoElement> & {
   autoplay?: boolean | null;
   buffered?: string | null;

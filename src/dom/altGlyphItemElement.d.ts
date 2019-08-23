@@ -1,8 +1,4 @@
 import { svgCoreAttributesElement } from './abstract/svgCoreAttributesElement';
-
-
-type altGlyphItemElement = svgCoreAttributesElement<SVGElement> & {
-  
-};
+type altGlyphItemElement = svgCoreAttributesElement<SVGElement>;
 
 export { altGlyphItemElement };

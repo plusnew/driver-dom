@@ -1,6 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
 type styleElement = htmlGlobalAttributesElement<HTMLStyleElement> & {
   type?: string | null;
   media?: string | null;

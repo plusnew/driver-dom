@@ -1,8 +1,4 @@
 import { svgCoreAttributesElement } from './abstract/svgCoreAttributesElement';
-
-
-type fontfaceUriElement = svgCoreAttributesElement<SVGElement> & {
-  
-};
+type fontfaceUriElement = svgCoreAttributesElement<SVGElement>;
 
 export { fontfaceUriElement };

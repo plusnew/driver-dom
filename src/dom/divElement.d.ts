@@ -1,8 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
-type divElement = htmlGlobalAttributesElement<HTMLDivElement> & {
-  
-};
+type divElement = htmlGlobalAttributesElement<HTMLDivElement>;
 
 export { divElement };

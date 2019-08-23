@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, '..', '..', 'src'),
@@ -30,5 +31,10 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [path.join(__dirname, '..', '..', 'dist')],
     }),
+    new CopyWebpackPlugin([
+      {
+        from: '**/*.d.ts',
+      }
+    ]),
   ],
 };

@@ -1,8 +1,4 @@
 import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-
-
-type sectionElement = htmlGlobalAttributesElement<HTMLElement> & {
-  
-};
+type sectionElement = htmlGlobalAttributesElement<HTMLElement>;
 
 export { sectionElement };
