@@ -307,9 +307,9 @@
     "@types/yargs" "^13.0.0"
 
 "@plusnew/core@^1.0.0-alpha.1":
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-alpha.1.tgz#826fc8f687c79395aae92227edfbdb6de8b06656"
-  integrity sha512-lu8TdRU9+YT3v46DYXDKVepmrbBgJ7DqemWMpMbh/VeWDA5+a8aG0Rct1muyd9GYPN/mjc5RPTLMwm6NhgBumg==
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-alpha.2.tgz#6dda50757ae6b775cbcadd245e7d82f9576dd162"
+  integrity sha512-LrDlKSZg65IZkmsm99I9ixftmpBw90P3zFTQQ5HnJdTV6IEswCv93RtnOYuI1dn+6+ndmJpJDLH75mWxKM6VVA==
 
 "@types/anymatch@*":
   version "1.3.1"
