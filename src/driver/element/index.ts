@@ -1,5 +1,5 @@
-import { IDriver } from '@plusnew/core/dist/src/interfaces/driver';
-import DomInstance from '@plusnew/core/dist/src/instances/types/Dom/Instance';
+import { IDriver } from '@plusnew/core/src/interfaces/driver';
+import DomInstance from '@plusnew/core/src/instances/types/Dom/Instance';
 import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent } from './util';
 
 function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {

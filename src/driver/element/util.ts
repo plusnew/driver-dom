@@ -1,7 +1,7 @@
-import { props } from '@plusnew/core/dist/src/interfaces/component';
-import { PlusnewElement } from '@plusnew/core/dist/src/PlusnewAbstractElement';
+import { props } from '@plusnew/core/src/interfaces/component';
+import { PlusnewElement } from '@plusnew/core/src/PlusnewAbstractElement';
 
-export function isInputElement(type: PlusnewElement, props: props) {
+export function isInputElement(type: PlusnewElement, _props: props) {
   return type === 'input';
 }
 

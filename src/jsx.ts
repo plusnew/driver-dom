@@ -1,4 +1,4 @@
-import PlusnewAbstractElement from '@plusnew/core/dist/src/PlusnewAbstractElement';
+import PlusnewAbstractElement from '@plusnew/core/src/PlusnewAbstractElement';
 import { htmlElement } from './dom/htmlElement';
 import { linkElement } from './dom/linkElement';
 import { metaElement } from './dom/metaElement';

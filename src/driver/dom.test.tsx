@@ -91,7 +91,7 @@ describe('dom handling', () => {
   });
 
   it('replacing children of dom', () => {
-    const local = store(true, (state, action: boolean) => action);
+    const local = store(true, (_state, action: boolean) => action);
     const MainComponent = component(
       'Component',
       () =>
@@ -132,7 +132,7 @@ describe('dom handling', () => {
   });
 
   it('boolean attributes', () => {
-    const local = store(true, (state, action: boolean) => action);
+    const local = store(true, (_state, action: boolean) => action);
 
     const Component = component(
       'Component',
@@ -170,7 +170,7 @@ describe('dom handling', () => {
   });
 
   it('input oninput', () => {
-    const local = store('foo', (state, action: string) => action);
+    const local = store('foo', (_state, action: string) => action);
 
     const Component = component(
       'Component',
@@ -206,7 +206,7 @@ describe('dom handling', () => {
   });
 
   it('input oninput', () => {
-    const local = store('foo', (state, action: string) => `${action}suffix`);
+    const local = store('foo', (_state, action: string) => `${action}suffix`);
 
     const Component = component(
       'Component',
@@ -230,7 +230,7 @@ describe('dom handling', () => {
   });
 
   it('input oninput', () => {
-    const local = store('foo', (state, action: string) => 'blarg');
+    const local = store('foo', (_state, _action: string) => 'blarg');
 
     const Component = component(
       'Component',
@@ -259,7 +259,7 @@ describe('dom handling', () => {
   });
 
   it('removing multiple children one at a time', () => {
-    const local = store(0, (state, action: number) => action);
+    const local = store(0, (_state, action: number) => action);
 
     const MainComponent = component(
       'Component',

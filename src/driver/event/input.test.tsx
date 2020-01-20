@@ -11,7 +11,7 @@ describe('firing input events', () => {
   });
 
   it('is oninput called on text', () => {
-    const local = store('foo', (state, newValue: string) => newValue);
+    const local = store('foo', (_state, newValue: string) => newValue);
 
     const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
       local.dispatch(evt.currentTarget.value);
@@ -41,7 +41,7 @@ describe('firing input events', () => {
   });
 
   it('is oninput called on number', () => {
-    const local = store(0, (state, newValue: number) => newValue);
+    const local = store(0, (_state, newValue: number) => newValue);
 
     const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
       local.dispatch(Number(evt.currentTarget.value));
@@ -70,7 +70,7 @@ describe('firing input events', () => {
   });
 
   it('is oninput called on explicit text', () => {
-    const local = store('foo', (state, newValue: string) => newValue);
+    const local = store('foo', (_state, newValue: string) => newValue);
 
     const change = jasmine.createSpy('changex', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
       local.dispatch(evt.currentTarget.value);

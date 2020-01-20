@@ -11,7 +11,7 @@ describe('firing input events', () => {
   });
 
   it('is oninput called on radio, without revert', () => {
-    const local = store('foo', (state, newValue: string) => newValue);
+    const local = store('foo', (_state, newValue: string) => newValue);
 
     const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
       local.dispatch(evt.currentTarget.value);
@@ -57,7 +57,7 @@ describe('firing input events', () => {
   });
 
   it('is oninput called on radio, with revert', () => {
-    const local = store('foo', (state, newValue: string) => state);
+    const local = store('foo', (state, _newValue: string) => state);
 
     const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
       local.dispatch(evt.currentTarget.value);

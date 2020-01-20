@@ -10,7 +10,7 @@ describe('dom handling', () => {
   });
 
   it('updating style attributes', () => {
-    const local = store('20px', (state, action: string) => action);
+    const local = store('20px', (_state, action: string) => action);
 
     const Component = component(
       'Component',
@@ -31,7 +31,7 @@ describe('dom handling', () => {
   });
 
   it('removing style attributes', () => {
-    const local = store(true, (state, action: boolean) => action);
+    const local = store(true, (_state, action: boolean) => action);
 
     const Component = component(
       'Component',
@@ -59,7 +59,7 @@ describe('dom handling', () => {
   });
 
   it('updating style attributes', () => {
-    const local = store(true, (state, action: boolean) => action);
+    const local = store(true, (_state, action: boolean) => action);
 
     const Component = component(
       'Component',
