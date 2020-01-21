@@ -1,6 +1,6 @@
 import { IDriver } from '@plusnew/core/src/interfaces/driver';
 import DomInstance from '@plusnew/core/src/instances/types/Dom/Instance';
-import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent } from './util';
+import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent, isOption, isSelect } from './util';
 
 function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
   if (refChild === null) {
@@ -98,6 +98,8 @@ const element: IDriver<Element, Text>['element'] = {
     if ('autofocus' in domInstance.props && domInstance.props.autofocus === true && domInstance.ref instanceof HTMLInputElement) {
       domInstance.ref.focus();
     }
+
+    setSelectedIfNeeded(domInstance);
   },
 };
 
@@ -184,29 +186,29 @@ function setAttributeAsProperty(keyName: string): keyName is 'checked' | 'value'
 function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string {
   return Object.keys(style).reduce((styleString, styleIndex) => `${styleString}${styleIndex}:${style[styleIndex]};`, '');
 }
-// /**
-//  * sets the value of an OPTION-Element
-//  * looks for the parent select element to set the selected property
-//  * the select.value is not used, because option elements could be added asynchronously
-//  * and browsers dont care about that properly
-//  */
-// function setSelectedIfNeeded(instance: DomInstance<Element, Text>) {
-//   if (isOption(instance.type)) {
-//     const select = instance.findParent(instance.parentInstance, (instance) => {
-//       if (instance instanceof DomInstance) {
-//         if (isSelect(instance.type)) {
-//           return true;
-//         }
-//         throw new Error(`Nearest dom of OPTION is not a SELECT but a ${instance.type.toString().toUpperCase()}`);
-//       }
-//       return false;
-//     });
-//
-//     if (!select) {
-//       throw new Error('Could not find SELECT-ELEMENT of OPTION');
-//     }
-//     instance.setProp('selected', instance.props.value === (select as DomInstance<HostElement, HostTextElement>).props.value);
-//   }
-// }
-//
+
+/**
+ * sets the value of an OPTION-Element
+ * looks for the parent select element to set the selected property
+ * the select.value is not used, because option elements could be added asynchronously
+ * and browsers dont care about that properly
+ */
+function setSelectedIfNeeded(instance: DomInstance<Element, Text>) {
+  if (isOption(instance.type)) {
+    const select = instance.findParent((instance) => {
+      if (instance instanceof DomInstance) {
+        if (isSelect(instance.type)) {
+          return true;
+        }
+        throw new Error(`Nearest dom of OPTION is not a SELECT but a ${instance.type.toString().toUpperCase()}`);
+      }
+      return false;
+    });
+    if (!select) {
+      throw new Error('Could not find SELECT-Element of OPTION');
+    }
+    instance.setProp('selected', instance.props.value === (select as DomInstance<Element, Text>).props.value);
+  }
+}
+
 export default element;

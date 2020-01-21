@@ -1,7 +1,7 @@
 import plusnew, { component, store } from '@plusnew/core';
 import driver from '../index';
 
-xdescribe('firing onchange events', () => {
+describe('firing onchange events', () => {
   let container: HTMLElement;
 
   beforeEach(() => {
@@ -33,7 +33,7 @@ xdescribe('firing onchange events', () => {
     const select = container.childNodes[0] as HTMLSelectElement;
 
     select.value = 'bar';
-    const event = new CustomEvent('change', { detail: { target: select } });
+    const event = new CustomEvent('input', { detail: { target: select } });
     select.dispatchEvent(event);
 
     expect(change.calls.count()).toEqual(1);
@@ -51,7 +51,7 @@ xdescribe('firing onchange events', () => {
 
     expect(() => {
       plusnew.render(<Component />, { driver: driver(container) });
-    }).toThrow(new Error('Could not find SELECT-ELEMENT of OPTION'));
+    }).toThrow(new Error('Could not find SELECT-Element of OPTION'));
   });
 
   it('throw exception when the nearest dom is not an option', () => {
@@ -130,7 +130,7 @@ xdescribe('firing onchange events', () => {
     const select = container.childNodes[0] as HTMLSelectElement;
 
     select.value = 'bar';
-    const event = new CustomEvent('change', { detail: { target: select } });
+    const event = new CustomEvent('input', { detail: { target: select } });
     select.dispatchEvent(event);
 
     expect(change.calls.count()).toEqual(1);
