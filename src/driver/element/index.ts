@@ -1,6 +1,9 @@
 import { IDriver } from '@plusnew/core/src/interfaces/driver';
 import DomInstance from '@plusnew/core/src/instances/types/Dom/Instance';
+
 import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent, isOption, isSelect } from './util';
+
+const HOST_INSTANCE_TYPE = 'host';
 
 function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
   if (refChild === null) {
@@ -196,7 +199,7 @@ function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string
 function setSelectedIfNeeded(instance: DomInstance<Element, Text>) {
   if (isOption(instance.type)) {
     const select = instance.findParent((instance) => {
-      if (instance instanceof DomInstance) {
+      if (instance.nodeType === HOST_INSTANCE_TYPE) {
         if (isSelect(instance.type)) {
           return true;
         }
