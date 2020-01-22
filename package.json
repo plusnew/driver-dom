@@ -27,7 +27,7 @@
   "homepage": "https://github.com/plusnew/driver-dom#readme",
   "dependencies": {},
   "devDependencies": {
-    "@plusnew/core": "alpha",
+    "@plusnew/core": "beta",
     "@types/jest": "^24.9.0",
     "jest": "^24.9.0",
     "requestidlecallback": "^0.3.0",
