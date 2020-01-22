@@ -1,5 +1,5 @@
 import { IDriver } from '@plusnew/core/src/interfaces/driver';
-import DomInstance from '@plusnew/core/src/instances/types/Dom/Instance';
+import HostInstance from '@plusnew/core/src/instances/types/Host/Instance';
 
 import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent, isOption, isSelect } from './util';
 
@@ -106,7 +106,7 @@ const element: IDriver<Element, Text>['element'] = {
   },
 };
 
-function registerEventListener(instance: DomInstance<Element, Text>, eventName: string, listener: any) {
+function registerEventListener(instance: HostInstance<Element, Text>, eventName: string, listener: any) {
 
   // Oninput already gets ommitted, because this is a special case handled by registerInputListener
   if ((eventName === 'oninput' && hasInputEvent(instance.type, instance.props)) === false) {
@@ -114,7 +114,7 @@ function registerEventListener(instance: DomInstance<Element, Text>, eventName: 
   }
 }
 
-function registerInputWatcher(instance: DomInstance<Element, Text>) {
+function registerInputWatcher(instance: HostInstance<Element, Text>) {
   const onchangeWrapper = (evt: Event) => {
     let preventDefault = true;
     let changeKey: 'value' | 'checked' = 'value';
@@ -159,7 +159,7 @@ function isEvent(attributeName: string) {
 /**
  * sets a special namespace, in case self is an svg, so that children will created with correct namespace
  */
-function setNamespace(instance: DomInstance<Element, Text>) {
+function setNamespace(instance: HostInstance<Element, Text>) {
   const currentNamespace = instance.props.xmlns as string || getSpecialNamespace(instance.type as string) || instance.renderOptions.xmlns;
   if (currentNamespace !== instance.renderOptions.xmlns) {
     instance.renderOptions = {
@@ -196,7 +196,7 @@ function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string
  * the select.value is not used, because option elements could be added asynchronously
  * and browsers dont care about that properly
  */
-function setSelectedIfNeeded(instance: DomInstance<Element, Text>) {
+function setSelectedIfNeeded(instance: HostInstance<Element, Text>) {
   if (isOption(instance.type)) {
     const select = instance.findParent((instance) => {
       if (instance.nodeType === HOST_INSTANCE_TYPE) {
@@ -210,7 +210,7 @@ function setSelectedIfNeeded(instance: DomInstance<Element, Text>) {
     if (!select) {
       throw new Error('Could not find SELECT-Element of OPTION');
     }
-    instance.setProp('selected', instance.props.value === (select as DomInstance<Element, Text>).props.value);
+    instance.setProp('selected', instance.props.value === (select as HostInstance<Element, Text>).props.value);
   }
 }
 

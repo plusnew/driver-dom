@@ -1,5 +1,5 @@
 import plusnew from '@plusnew/core';
-import DomInstance from '@plusnew/core/src/instances/types/Dom/Instance';
+import HostInstance from '@plusnew/core/src/instances/types/Host/Instance';
 import RootInstance from '@plusnew/core/src/instances/types/Root/Instance';
 import driver from '../../';
 
@@ -21,7 +21,7 @@ describe('element handling', () => {
         renderOptions,
       );
 
-      const target = new DomInstance(
+      const target = new HostInstance(
         <div />,
         rootInstance,
         () => null,
@@ -32,7 +32,7 @@ describe('element handling', () => {
 
       driverInstance.element.moveAfterSibling(
         target,
-        new DomInstance(
+        new HostInstance(
           <div />,
           rootInstance,
           () => null,

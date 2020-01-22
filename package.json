@@ -1,6 +1,6 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.10",
   "description": "plusnew driver for the browser",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/plusnew/driver-dom#readme",
   "dependencies": {},
   "devDependencies": {
-    "@plusnew/core": "1.0.0-alpha.8",
+    "@plusnew/core": "alpha",
     "@types/jest": "^24.9.0",
     "jest": "^24.9.0",
     "ts-jest": "^24.3.0",
