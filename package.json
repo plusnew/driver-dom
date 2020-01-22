@@ -1,6 +1,6 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "1.0.0-alpha.10",
+  "version": "1.0.0-alpha.11",
   "description": "plusnew driver for the browser",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -30,6 +30,7 @@
     "@plusnew/core": "alpha",
     "@types/jest": "^24.9.0",
     "jest": "^24.9.0",
+    "requestidlecallback": "^0.3.0",
     "ts-jest": "^24.3.0",
     "tslint": "^5.20.1",
     "tslint-config-airbnb": "^5.11.2",
