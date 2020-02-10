@@ -28,7 +28,7 @@
   "dependencies": {},
   "devDependencies": {
     "@plusnew/core": "beta",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
     "requestidlecallback": "^0.3.0",
     "ts-jest": "^25.0.0",
