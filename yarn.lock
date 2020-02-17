@@ -344,6 +344,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@plusnew/core@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.4.tgz#182257847996355fac39aeda06fdbaa90cd3c029"
+  integrity sha512-6kaySgLBPfFbxz7NAiH7hjytPLeHOhPClKf2q3eXlldmb9ceMRGNaajnkemaY/qFbKSHvkRpdq7OmxGUw0ILwQ==
+
 "@plusnew/core@beta":
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.2.tgz#a342a8feccb4713065b95059a7e7058974e2838e"
