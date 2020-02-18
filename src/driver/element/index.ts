@@ -26,24 +26,26 @@ const element: IDriver<Element, Text>['element'] = {
   remove: (domInstance) => {
     domInstance.ref.remove();
   },
-  setAttribute: (domInstance, attributeName, attributeValue) => {
-    const idlAttributeName = getIDLAttributeName(attributeName);
-
+  setAttribute: (domInstance, idlAttributeName, attributeValue) => {
     if (removeValues.includes(attributeValue)) {
-      element.unsetAttribute(domInstance, attributeName);
+      element.unsetAttribute(domInstance, idlAttributeName);
     } else {
       if (idlAttributeName.indexOf(':') === -1) {
-        if (isEvent(attributeName)) {
-          registerEventListener(domInstance, attributeName, attributeValue);
+        if (isEvent(idlAttributeName)) {
+          registerEventListener(domInstance, idlAttributeName, attributeValue);
         } else {
           if (attributeValue === false || attributeValue === true) {
-            (domInstance.ref as any)[attributeName] = attributeValue;
-          } else if (attributeName === 'style') {
+            const propertyAttributeName = getPropertyName(idlAttributeName);
+
+            (domInstance.ref as any)[propertyAttributeName] = attributeValue;
+          } else if (idlAttributeName === 'style') {
             domInstance.ref.setAttribute('style', getStylePropsAsAttribute(attributeValue));
-          } else if (setAttributeAsProperty(attributeName)) {
+          } else if (setAttributeAsProperty(idlAttributeName)) {
+            const propertyAttributeName = getPropertyName(idlAttributeName);
+
             // Properties like value or checked, need to be set as a property, not as an attribute
             // If these would be set as an attribute, the value would be ignored
-            (domInstance.ref as any)[attributeName] = attributeValue;
+            (domInstance.ref as any)[propertyAttributeName] = attributeValue;
           } else {
             domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
           }
@@ -73,7 +75,7 @@ const element: IDriver<Element, Text>['element'] = {
     if (isEvent(attributeName)) {
       (domInstance.ref as any)[attributeName] = null;
     } else {
-      const idlAttributeName = getIDLAttributeName(attributeName);
+      const idlAttributeName = getPropertyName(attributeName);
 
       domInstance.ref.removeAttribute(idlAttributeName);
     }
@@ -169,15 +171,13 @@ function setNamespace(instance: HostInstance<Element, Text>) {
   }
 }
 
-const propertyToIDLMapping = {
-  acceptCharset: 'accept-charset',
-  htmlFor: 'for',
-  httpEquiv: 'http-equiv',
+const idlAttributeToPropertyMapping = {
+  readonly: 'readOnly',
 };
 
-function getIDLAttributeName(propertyName: string): string {
-  if (propertyToIDLMapping.hasOwnProperty(propertyName)) {
-    return (propertyToIDLMapping as any)[propertyName];
+function getPropertyName(propertyName: string): string {
+  if (idlAttributeToPropertyMapping.hasOwnProperty(propertyName)) {
+    return (idlAttributeToPropertyMapping as any)[propertyName];
   }
   return propertyName;
 }

@@ -13,13 +13,26 @@ describe('dom handling', () => {
     const Component = component(
       'Component',
       () =>
-        <form acceptCharset="UTF-8" />,
+        <form accept-charset="UTF-8" />,
     );
     plusnew.render(<Component />, { driver: driver(container) });
 
     const target = container.childNodes[0] as HTMLFormElement;
 
     expect(target.acceptCharset).toBe('UTF-8');
+  });
+
+  it('correct handling of readOnly', () => {
+    const Component = component(
+      'Component',
+      () =>
+        <input readonly={true} value="foo" type="text" />,
+    );
+    plusnew.render(<Component />, { driver: driver(container) });
+
+    const target = container.childNodes[0] as HTMLInputElement;
+
+    expect(target.readOnly).toBe(true);
   });
 
   it('correct handling of class', () => {
@@ -39,7 +52,7 @@ describe('dom handling', () => {
     const Component = component(
       'Component',
       () =>
-        <label htmlFor="foo" />,
+        <label for="foo" />,
     );
     plusnew.render(<Component />, { driver: driver(container) });
 
@@ -52,7 +65,7 @@ describe('dom handling', () => {
     const Component = component(
       'Component',
       () =>
-        <meta httpEquiv="refresh" />,
+        <meta http-equiv="refresh" />,
     );
     plusnew.render(<Component />, { driver: driver(container) });
 
