@@ -11,5 +11,9 @@ export default (rootElement: Element): IDriver<Element, Text> =>  {
     element,
     text,
     getRootElement: () => rootElement,
+    setupPortal: ({ portalEntrance, portalExit }) => {
+      portalEntrance.renderOptions.xmlns = portalExit.renderOptions.xmlns;
+      portalEntrance.renderOptions.xmlnsPrefixes = portalExit.renderOptions.xmlnsPrefixes;
+    },
   };
 };

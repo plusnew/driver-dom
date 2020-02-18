@@ -344,6 +344,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@plusnew/core@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.4.tgz#182257847996355fac39aeda06fdbaa90cd3c029"
+  integrity sha512-6kaySgLBPfFbxz7NAiH7hjytPLeHOhPClKf2q3eXlldmb9ceMRGNaajnkemaY/qFbKSHvkRpdq7OmxGUw0ILwQ==
+
 "@plusnew/core@beta":
   version "1.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.2.tgz#a342a8feccb4713065b95059a7e7058974e2838e"
@@ -3246,9 +3251,9 @@ tr46@^1.0.1:
     punycode "^2.1.0"
 
 ts-jest@^25.0.0:
-  version "25.0.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-25.0.0.tgz#d83b266e6ffda0c458a129951b3fe3567f8ce8df"
-  integrity sha512-F+hZg3j7XYOFpXJteXb4lnqy7vQzTmpTmX7AJT6pvSGeZejyXj1Lk0ArpnrEPOpv6Zu/NugHc5W7FINngC9WZQ==
+  version "25.2.0"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-25.2.0.tgz#dfd87c2b71ef4867f5a0a44f40cb9c67e02991ac"
+  integrity sha512-VaRdb0da46eorLfuHEFf0G3d+jeREcV+Wb/SvW71S4y9Oe8SHWU+m1WY/3RaMknrBsnvmVH0/rRjT8dkgeffNQ==
   dependencies:
     bs-logger "0.x"
     buffer-from "1.x"
