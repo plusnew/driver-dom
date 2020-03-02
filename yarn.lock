@@ -349,11 +349,6 @@
   resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.4.tgz#182257847996355fac39aeda06fdbaa90cd3c029"
   integrity sha512-6kaySgLBPfFbxz7NAiH7hjytPLeHOhPClKf2q3eXlldmb9ceMRGNaajnkemaY/qFbKSHvkRpdq7OmxGUw0ILwQ==
 
-"@plusnew/core@beta":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.2.tgz#a342a8feccb4713065b95059a7e7058974e2838e"
-  integrity sha512-2AlITMvkWVAxu15UaLzqc98Dk/Z0XRARKtUTJ624K0SohDyXf30WiqhBiQAVA4qI0ldqFX5gHujRrGZssSjJrA==
-
 "@sinonjs/commons@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.7.0.tgz#f90ffc52a2e519f018b13b6c4da03cbff36ebed6"
@@ -3387,9 +3382,9 @@ typedarray-to-buffer@^3.1.5:
     is-typedarray "^1.0.0"
 
 typescript@^3.7.5:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
-  integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
+  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
 
 union-value@^1.0.0:
   version "1.0.1"
