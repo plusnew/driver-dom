@@ -345,14 +345,9 @@
     chalk "^3.0.0"
 
 "@plusnew/core@^1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.4.tgz#182257847996355fac39aeda06fdbaa90cd3c029"
-  integrity sha512-6kaySgLBPfFbxz7NAiH7hjytPLeHOhPClKf2q3eXlldmb9ceMRGNaajnkemaY/qFbKSHvkRpdq7OmxGUw0ILwQ==
-
-"@plusnew/core@beta":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.2.tgz#a342a8feccb4713065b95059a7e7058974e2838e"
-  integrity sha512-2AlITMvkWVAxu15UaLzqc98Dk/Z0XRARKtUTJ624K0SohDyXf30WiqhBiQAVA4qI0ldqFX5gHujRrGZssSjJrA==
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.5.tgz#7f56de0b2f61ec47d3089f8966f98670a4ddd44d"
+  integrity sha512-t9ZwvZRX+zKhR9OvwVpwr+5CXmRNPYIwyVL4D/Qvn5TGP1dBpTX7S96OsmTeHbn6nYMYOcwQKWN+scDmYDxY9A==
 
 "@sinonjs/commons@^1.7.0":
   version "1.7.0"
