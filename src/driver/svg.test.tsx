@@ -1,4 +1,4 @@
-import plusnew, { component, store } from '@plusnew/core';
+import plusnew, { component, store, PortalExit, PortalEntrance } from '@plusnew/core';
 import driver from './index';
 
 const htmlNamespace = 'http://www.w3.org/1999/xhtml';
@@ -144,6 +144,7 @@ describe('rendering svg components', () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
+    expect((container.childNodes[0] as SVGElement).getAttribute('xmlns:xlink')).toBe(xlinkNamespaceUrl);
     expect(
       (container.childNodes[0].childNodes[0] as SVGUseElement).getAttributeNS(xlinkNamespaceUrl, 'href'),
     ).toBe('someValue');
@@ -165,5 +166,39 @@ describe('rendering svg components', () => {
     expect(() =>
       plusnew.render(<Component />, { driver: driver(container) }),
     ).toThrow(new Error('The namespace prefix xlink is not defined'));
+  });
+
+  it('correct handling with portals', () => {
+    const local = store(false);
+    const Component = component(
+      'Component',
+      () =>
+        <>
+          <div>
+            <PortalExit name="foo" />
+          </div>
+          <svg xmlns={svgNamespace}>
+            <PortalEntrance name="foo"><span /></PortalEntrance>
+            <local.Observer>{localState => localState && <g />}</local.Observer>
+          </svg>
+        </>,
+    );
+
+    plusnew.render(<Component />, { driver: driver(container) });
+
+    const portalExit = container.childNodes[0] as HTMLElement;
+    const svg = container.childNodes[1] as SVGElement;
+
+    expect((portalExit.childNodes[0] as HTMLElement).tagName).toBe('SPAN');
+    expect((portalExit.childNodes[0] as HTMLElement).namespaceURI).toBe(htmlNamespace);
+    expect(svg.childNodes.length).toBe(0);
+
+    local.dispatch(true);
+
+    expect((portalExit.childNodes[0] as HTMLElement).tagName).toBe('SPAN');
+    expect((portalExit.childNodes[0] as HTMLElement).namespaceURI).toBe(htmlNamespace);
+    expect(svg.childNodes.length).toBe(1);
+    expect((svg.childNodes[0] as SVGGElement).tagName).toBe("g");
+    expect((svg.childNodes[0] as SVGGElement).namespaceURI).toBe(svgNamespace);
   });
 });

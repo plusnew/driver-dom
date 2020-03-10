@@ -12,8 +12,12 @@ export default (rootElement: Element): IDriver<Element, Text> =>  {
     text,
     getRootElement: () => rootElement,
     setupPortal: ({ portalEntrance, portalExit }) => {
-      portalEntrance.renderOptions.xmlns = portalExit.renderOptions.xmlns;
-      portalEntrance.renderOptions.xmlnsPrefixes = portalExit.renderOptions.xmlnsPrefixes;
+      // PortalEntrance has to create new renderoptions, to break referencing and to create a new copy
+      portalEntrance.renderOptions = {
+        ...portalEntrance.renderOptions,
+        xmlns: portalExit.renderOptions.xmlns,
+        xmlnsPrefixes: portalExit.renderOptions.xmlnsPrefixes,
+      }
     },
   };
 };

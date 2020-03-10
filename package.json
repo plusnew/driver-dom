@@ -1,6 +1,6 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "plusnew driver for the browser",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,13 +27,13 @@
   "homepage": "https://github.com/plusnew/driver-dom#readme",
   "dependencies": {},
   "devDependencies": {
-    "@plusnew/core": "^1.0.0-beta.4",
-    "@types/jest": "^25.1.2",
+    "@plusnew/core": "^1.0.0-beta.6",
+    "@types/jest": "^25.1.4",
     "jest": "^25.1.0",
     "requestidlecallback": "^0.3.0",
-    "ts-jest": "^25.0.0",
-    "tslint": "^5.20.1",
+    "ts-jest": "^25.2.1",
+    "tslint": "^6.0.0",
     "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   }
 }

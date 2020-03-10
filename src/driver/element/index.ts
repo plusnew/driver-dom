@@ -61,6 +61,7 @@ const element: IDriver<Element, Text>['element'] = {
               [namespacedidlAttributeName]: attributeValue,
             },
           };
+          domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
         } else {
           if (domInstance.renderOptions.xmlnsPrefixes && typeof domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] !== undefined) {
             domInstance.ref.setAttributeNS(domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] as string, namespacedidlAttributeName, `${attributeValue}`);
