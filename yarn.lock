@@ -344,10 +344,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@plusnew/core@^1.0.0-beta.6":
-  version "1.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0-beta.6.tgz#44167c2f89c81673fe16ec0a54cc77e6977503d1"
-  integrity sha512-Q6xXlsM3ochB+PuQvgxfDyecsYfH/SgvOfndVa55V1dFHQB4Vh7O9kXrGNo4jXxnI21FdLh8/vpdP7HyEJOThQ==
+"@plusnew/core@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.0.tgz#7243fb61ceb3709b2d98fe676d56df4b28c785f1"
+  integrity sha512-ug1TummEuuhZFmI67qLpxdXDQ4P1KNqTh2RjfxpyGhgYQwK6Ode5yUh3OlMw0dqxDAMcuiWuzgTiH7Q4yUzErA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.7.0"
