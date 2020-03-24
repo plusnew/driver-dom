@@ -1,4 +1,4 @@
-import { IDriver } from '@plusnew/core/src/interfaces/driver';
+import type { IDriver } from '@plusnew/core/src/interfaces/driver';
 import element from './element';
 import text from './text';
 

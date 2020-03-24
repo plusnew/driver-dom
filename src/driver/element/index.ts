@@ -1,6 +1,4 @@
-import { IDriver } from '@plusnew/core/src/interfaces/driver';
-import HostInstance from '@plusnew/core/src/instances/types/Host/Instance';
-
+import type { IDriver, HostInstance } from '@plusnew/core/src/interfaces/driver';
 import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent, isOption, isSelect } from './util';
 
 const HOST_INSTANCE_TYPE = 'host';
@@ -201,10 +199,10 @@ function setSelectedIfNeeded(instance: HostInstance<Element, Text>) {
   if (isOption(instance.type)) {
     const select = instance.findParent((instance) => {
       if (instance.nodeType === HOST_INSTANCE_TYPE) {
-        if (isSelect(instance.type)) {
+        if (isSelect((instance as HostInstance<Element, Text>).type)) {
           return true;
         }
-        throw new Error(`Nearest dom of OPTION is not a SELECT but a ${instance.type.toString().toUpperCase()}`);
+        throw new Error(`Nearest dom of OPTION is not a SELECT but a ${(instance as HostInstance<Element, Text>).type.toString().toUpperCase()}`);
       }
       return false;
     });

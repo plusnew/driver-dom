@@ -1,4 +1,5 @@
-import plusnew, { Props, Component, store } from '@plusnew/core/src/index';
+import plusnew, { Component, store } from '@plusnew/core/src/index';
+import type { Props } from '@plusnew/core/src/index';
 
 type props = { urgent: boolean; children: any; };
 

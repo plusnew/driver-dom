@@ -1,4 +1,4 @@
-import PlusnewAbstractElement from '@plusnew/core/src/PlusnewAbstractElement';
+import type PlusnewAbstractElement from '@plusnew/core/src/PlusnewAbstractElement';
 import type { htmlElement } from './dom/htmlElement';
 import type { linkElement } from './dom/linkElement';
 import type { metaElement } from './dom/metaElement';

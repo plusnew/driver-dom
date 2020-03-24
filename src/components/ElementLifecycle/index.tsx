@@ -1,5 +1,5 @@
 import plusnew, { component, ComponentContainer } from '@plusnew/core/src/index';
-import Instance from '@plusnew/core/src/instances/types/Component/Instance';
+import type Instance from '@plusnew/core/src/instances/types/Component/Instance';
 
 type props = {
   elementDidMount?: (element: Element) => void;
