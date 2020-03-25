@@ -403,9 +403,9 @@
     chalk "^3.0.0"
 
 "@plusnew/core@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.1.tgz#cc700c8c3d706e5411ec3388308849852a500dd7"
-  integrity sha512-1TXa5FrezqjFayRIOiKN38Ks8Kc9sr+1sxbYhv/pjgOUHJcvYMUMqHr6coDqtHLj5ER34m4dmrtS127B9CMIGg==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.0.2.tgz#ab0d299e1a4fab47417811d95119eb46128ebb89"
+  integrity sha512-oC9CovJND95/W6nIgEyAafIAmmgtU9/Y5FwRO37FfVG8hP3hCKYfJJ1a6a7v2edn5qca577+3SzXPk5DBrCZgw==
 
 "@sinonjs/commons@^1.7.0":
   version "1.7.1"
