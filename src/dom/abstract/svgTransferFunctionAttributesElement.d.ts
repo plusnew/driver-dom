@@ -1,8 +1,3 @@
-
-
-
-type svgTransferFunctionAttributesElement<currentElement> = {
-  
-};
+type svgTransferFunctionAttributesElement<currentElement> = {};
 
 export { svgTransferFunctionAttributesElement };

@@ -1,8 +1,3 @@
-
-
-
-type svgAnimationAttributeTargetAttributesElement<currentElement> = {
-  
-};
+type svgAnimationAttributeTargetAttributesElement<currentElement> = {};
 
 export { svgAnimationAttributeTargetAttributesElement };

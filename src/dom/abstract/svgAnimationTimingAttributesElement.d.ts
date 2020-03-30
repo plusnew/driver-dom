@@ -1,8 +1,3 @@
-
-
-
-type svgAnimationTimingAttributesElement<currentElement> = {
-  
-};
+type svgAnimationTimingAttributesElement<currentElement> = {};
 
 export { svgAnimationTimingAttributesElement };

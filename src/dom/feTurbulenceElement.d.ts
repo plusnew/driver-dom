@@ -1,4 +1,4 @@
-import { svgCoreAttributesElement } from './abstract/svgCoreAttributesElement';
+import { svgCoreAttributesElement } from "./abstract/svgCoreAttributesElement";
 type feTurbulenceElement = svgCoreAttributesElement<SVGElement>;
 
 export { feTurbulenceElement };

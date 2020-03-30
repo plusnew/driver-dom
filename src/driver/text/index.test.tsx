@@ -1,12 +1,12 @@
-import '@plusnew/core';
-import RootInstance from '@plusnew/core/src/instances/types/Root/Instance';
-import TextInstance from '@plusnew/core/src/instances/types/Text/Instance';
-import driver from '../../';
+import "@plusnew/core";
+import RootInstance from "@plusnew/core/src/instances/types/Root/Instance";
+import TextInstance from "@plusnew/core/src/instances/types/Text/Instance";
+import driver from "../../";
 
-describe('text handling', () => {
-  it('moveAfterSibling', () => {
+describe("text handling", () => {
+  it("moveAfterSibling", () => {
     expect(() => {
-      const rootElement = document.createElement('div');
+      const rootElement = document.createElement("div");
       const driverInstance = driver(rootElement);
 
       const renderOptions = {
@@ -17,27 +17,22 @@ describe('text handling', () => {
         true,
         undefined,
         () => null,
-        renderOptions,
+        renderOptions
       );
 
       const target = new TextInstance(
-        'foo',
+        "foo",
         rootInstance,
         () => null,
-        renderOptions,
+        renderOptions
       );
 
       rootElement.removeChild(rootElement.childNodes[0]);
 
       driverInstance.text.moveAfterSibling(
         target,
-        new TextInstance(
-          'bar',
-          rootInstance,
-          () => null,
-          renderOptions,
-        ),
+        new TextInstance("bar", rootInstance, () => null, renderOptions)
       );
-    }).toThrow(new Error('Could not move orphaned node'));
+    }).toThrow(new Error("Could not move orphaned node"));
   });
 });

@@ -1,8 +1,3 @@
-
-
-
-type svgAnimationAditionAttributesElement<currentElement> = {
-  
-};
+type svgAnimationAditionAttributesElement<currentElement> = {};
 
 export { svgAnimationAditionAttributesElement };

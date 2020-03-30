@@ -1,38 +1,38 @@
-import type { props } from '@plusnew/core/src/interfaces/component';
-import type { PlusnewElement } from '@plusnew/core/src/PlusnewAbstractElement';
+import type { props } from "@plusnew/core/src/interfaces/component";
+import type { PlusnewElement } from "@plusnew/core/src/PlusnewAbstractElement";
 
 export function isInputElement(type: PlusnewElement, _props: props) {
-  return type === 'input';
+  return type === "input";
 }
 
 export function isTextArea(type: PlusnewElement) {
-  return type === 'textarea';
+  return type === "textarea";
 }
 
 export function isCheckbox(type: PlusnewElement, props: props) {
-  return isInputElement(type, props) && props.type === 'checkbox';
+  return isInputElement(type, props) && props.type === "checkbox";
 }
 
 export function isRadio(type: PlusnewElement, props: props) {
-  return isInputElement(type, props) && props.type === 'radio';
+  return isInputElement(type, props) && props.type === "radio";
 }
 
 export function isSelect(type: PlusnewElement) {
-  return type === 'select';
+  return type === "select";
 }
 
 export function isOption(type: PlusnewElement) {
-  return type === 'option';
+  return type === "option";
 }
 
 export function hasInputEvent(type: PlusnewElement, props: props) {
   return isInputElement(type, props) || isTextArea(type) || isSelect(type);
 }
 
-const svgNamespace = 'http://www.w3.org/2000/svg';
+const svgNamespace = "http://www.w3.org/2000/svg";
 
 export function getSpecialNamespace(elementName: string): void | string {
-  if (elementName === 'svg') {
+  if (elementName === "svg") {
     return svgNamespace;
   }
 }

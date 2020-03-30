@@ -1,1 +1,1 @@
-export type crossorigin = 'anonymous' | 'use-credentials';
+export type crossorigin = "anonymous" | "use-credentials";

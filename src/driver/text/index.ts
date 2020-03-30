@@ -1,6 +1,10 @@
-import type { IDriver } from '@plusnew/core/src/interfaces/driver';
+import type { IDriver } from "@plusnew/core/src/interfaces/driver";
 
-function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
+function insertAfter(
+  parentElement: Element,
+  childElement: Element | Text,
+  refChild: Element | Text | null
+) {
   if (refChild === null) {
     parentElement.insertBefore(childElement, parentElement.firstChild);
   } else {
@@ -8,8 +12,8 @@ function insertAfter(parentElement: Element, childElement: Element | Text, refCh
   }
 }
 
-const text: IDriver<Element, Text>['text'] = {
-  create: text => document.createTextNode(text),
+const text: IDriver<Element, Text>["text"] = {
+  create: (text) => document.createTextNode(text),
   remove: (textInstance) => {
     textInstance.ref.remove();
   },
@@ -18,9 +22,13 @@ const text: IDriver<Element, Text>['text'] = {
   },
   moveAfterSibling: (self, previousSiblingInstance) => {
     if (self.ref.parentElement) {
-      insertAfter(self.ref.parentElement, self.ref, previousSiblingInstance && previousSiblingInstance.ref);
+      insertAfter(
+        self.ref.parentElement,
+        self.ref,
+        previousSiblingInstance && previousSiblingInstance.ref
+      );
     } else {
-      throw new Error('Could not move orphaned node');
+      throw new Error("Could not move orphaned node");
     }
   },
 };

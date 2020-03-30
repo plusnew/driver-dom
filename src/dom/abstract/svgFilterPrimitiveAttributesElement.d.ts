@@ -1,8 +1,3 @@
-
-
-
-type svgFilterPrimitiveAttributesElement<currentElement> = {
-  
-};
+type svgFilterPrimitiveAttributesElement<currentElement> = {};
 
 export { svgFilterPrimitiveAttributesElement };

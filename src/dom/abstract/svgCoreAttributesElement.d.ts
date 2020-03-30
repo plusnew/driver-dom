@@ -1,7 +1,8 @@
-import { svgStyleAttributesElement } from './../abstract/svgStyleAttributesElement';
+import { svgStyleAttributesElement } from "./../abstract/svgStyleAttributesElement";
 
-
-type svgCoreAttributesElement<currentElement> = svgStyleAttributesElement<SVGElement> & {
+type svgCoreAttributesElement<currentElement> = svgStyleAttributesElement<
+  SVGElement
+> & {
   [key: string]: any;
 };
 

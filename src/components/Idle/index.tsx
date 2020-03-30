@@ -1,13 +1,13 @@
-import plusnew, { Component, store } from '@plusnew/core/src/index';
-import type { Props } from '@plusnew/core/src/index';
+import plusnew, { Component, store } from "@plusnew/core/src/index";
+import type { Props } from "@plusnew/core/src/index";
 
-type props = { urgent: boolean; children: any; };
+type props = { urgent: boolean; children: any };
 
 export default class Idle extends Component<props> {
-  static displayName = 'Idle';
+  static displayName = "Idle";
 
   private hasIdleCallback() {
-    return 'requestIdleCallback' in window;
+    return "requestIdleCallback" in window;
   }
 
   render(Props: Props<props>) {
@@ -27,10 +27,11 @@ export default class Idle extends Component<props> {
 
     return (
       <showContentStore.Observer>
-        {showContentState =>
+        {(showContentState) => (
           <Props>
             {(props) => {
-              const showContent = props.urgent || showContentState || wasUrgentInPast;
+              const showContent =
+                props.urgent || showContentState || wasUrgentInPast;
               if (props.urgent && idleHandle !== null) {
                 wasUrgentInPast = true;
                 (window as any).cancelIdleCallback(idleHandle);
@@ -42,7 +43,7 @@ export default class Idle extends Component<props> {
               return null;
             }}
           </Props>
-        }
+        )}
       </showContentStore.Observer>
     );
   }
