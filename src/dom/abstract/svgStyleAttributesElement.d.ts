@@ -1,8 +1,3 @@
-
-
-
-type svgStyleAttributesElement<currentElement> = {
-  
-};
+type svgStyleAttributesElement<currentElement> = {};
 
 export { svgStyleAttributesElement };

@@ -1,4 +1,4 @@
-import { svgCoreAttributesElement } from './abstract/svgCoreAttributesElement';
+import { svgCoreAttributesElement } from "./abstract/svgCoreAttributesElement";
 type feConvolveMatrixElement = svgCoreAttributesElement<SVGElement>;
 
 export { feConvolveMatrixElement };

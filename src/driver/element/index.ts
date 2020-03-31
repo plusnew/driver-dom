@@ -1,9 +1,23 @@
-import type { IDriver, HostInstance } from '@plusnew/core/src/interfaces/driver';
-import { getSpecialNamespace, isCheckbox, isRadio, hasInputEvent, isOption, isSelect } from './util';
+import type {
+  IDriver,
+  HostInstance,
+} from "@plusnew/core/src/interfaces/driver";
+import {
+  getSpecialNamespace,
+  isCheckbox,
+  isRadio,
+  hasInputEvent,
+  isOption,
+  isSelect,
+} from "./util";
 
-const HOST_INSTANCE_TYPE = 'host';
+const HOST_INSTANCE_TYPE = "host";
 
-function insertAfter(parentElement: Element, childElement: Element | Text, refChild: Element | Text | null) {
+function insertAfter(
+  parentElement: Element,
+  childElement: Element | Text,
+  refChild: Element | Text | null
+) {
   if (refChild === null) {
     parentElement.insertBefore(childElement, parentElement.firstChild);
   } else {
@@ -13,11 +27,14 @@ function insertAfter(parentElement: Element, childElement: Element | Text, refCh
 
 const removeValues = [undefined, null];
 
-const element: IDriver<Element, Text>['element'] = {
+const element: IDriver<Element, Text>["element"] = {
   create: (domInstance) => {
     setNamespace(domInstance);
     if (domInstance.renderOptions.xmlns) {
-      return document.createElementNS(domInstance.renderOptions.xmlns, domInstance.type);
+      return document.createElementNS(
+        domInstance.renderOptions.xmlns,
+        domInstance.type
+      );
     }
     return document.createElement(domInstance.type);
   },
@@ -28,7 +45,7 @@ const element: IDriver<Element, Text>['element'] = {
     if (removeValues.includes(attributeValue)) {
       element.unsetAttribute(domInstance, idlAttributeName);
     } else {
-      if (idlAttributeName.indexOf(':') === -1) {
+      if (idlAttributeName.indexOf(":") === -1) {
         if (isEvent(idlAttributeName)) {
           registerEventListener(domInstance, idlAttributeName, attributeValue);
         } else {
@@ -36,8 +53,11 @@ const element: IDriver<Element, Text>['element'] = {
             const propertyAttributeName = getPropertyName(idlAttributeName);
 
             (domInstance.ref as any)[propertyAttributeName] = attributeValue;
-          } else if (idlAttributeName === 'style') {
-            domInstance.ref.setAttribute('style', getStylePropsAsAttribute(attributeValue));
+          } else if (idlAttributeName === "style") {
+            domInstance.ref.setAttribute(
+              "style",
+              getStylePropsAsAttribute(attributeValue)
+            );
           } else if (setAttributeAsProperty(idlAttributeName)) {
             const propertyAttributeName = getPropertyName(idlAttributeName);
 
@@ -49,8 +69,11 @@ const element: IDriver<Element, Text>['element'] = {
           }
         }
       } else {
-        const [namespacePrefix, namespacedidlAttributeName] = idlAttributeName.split(':');
-        if (namespacePrefix === 'xmlns') {
+        const [
+          namespacePrefix,
+          namespacedidlAttributeName,
+        ] = idlAttributeName.split(":");
+        if (namespacePrefix === "xmlns") {
           // @TODO add disallow changing this value
           domInstance.renderOptions = {
             ...domInstance.renderOptions,
@@ -61,10 +84,22 @@ const element: IDriver<Element, Text>['element'] = {
           };
           domInstance.ref.setAttribute(idlAttributeName, `${attributeValue}`);
         } else {
-          if (domInstance.renderOptions.xmlnsPrefixes && typeof domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] !== undefined) {
-            domInstance.ref.setAttributeNS(domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] as string, namespacedidlAttributeName, `${attributeValue}`);
+          if (
+            domInstance.renderOptions.xmlnsPrefixes &&
+            typeof domInstance.renderOptions.xmlnsPrefixes[namespacePrefix] !==
+              undefined
+          ) {
+            domInstance.ref.setAttributeNS(
+              domInstance.renderOptions.xmlnsPrefixes[
+                namespacePrefix
+              ] as string,
+              namespacedidlAttributeName,
+              `${attributeValue}`
+            );
           } else {
-            throw new Error(`The namespace prefix ${namespacePrefix} is not defined`);
+            throw new Error(
+              `The namespace prefix ${namespacePrefix} is not defined`
+            );
           }
         }
       }
@@ -81,13 +116,25 @@ const element: IDriver<Element, Text>['element'] = {
   },
   moveAfterSibling: (self, previousSiblingInstance) => {
     if (self.ref.parentElement) {
-      insertAfter(self.ref.parentElement, self.ref, previousSiblingInstance && previousSiblingInstance.ref);
+      insertAfter(
+        self.ref.parentElement,
+        self.ref,
+        previousSiblingInstance && previousSiblingInstance.ref
+      );
     } else {
-      throw new Error('Could not move orphaned node');
+      throw new Error("Could not move orphaned node");
     }
   },
-  appendChildAfterSibling: (parentInstance, childInstance, previousSiblingInstance) => {
-    insertAfter(parentInstance.ref, childInstance.ref, previousSiblingInstance && previousSiblingInstance.ref);
+  appendChildAfterSibling: (
+    parentInstance,
+    childInstance,
+    previousSiblingInstance
+  ) => {
+    insertAfter(
+      parentInstance.ref,
+      childInstance.ref,
+      previousSiblingInstance && previousSiblingInstance.ref
+    );
   },
   elementDidMountHook: (domInstance) => {
     if (hasInputEvent(domInstance.type, domInstance.props)) {
@@ -99,7 +146,11 @@ const element: IDriver<Element, Text>['element'] = {
      * safari is the only browser creating a focus on elements created after time
      * all the other browsers don't do that, that's why this functions sets it manually, after the element is inserted in the dom
      */
-    if ('autofocus' in domInstance.props && domInstance.props.autofocus === true && domInstance.ref instanceof HTMLInputElement) {
+    if (
+      "autofocus" in domInstance.props &&
+      domInstance.props.autofocus === true &&
+      domInstance.ref instanceof HTMLInputElement
+    ) {
       domInstance.ref.focus();
     }
 
@@ -107,10 +158,16 @@ const element: IDriver<Element, Text>['element'] = {
   },
 };
 
-function registerEventListener(instance: HostInstance<Element, Text>, eventName: string, listener: any) {
-
+function registerEventListener(
+  instance: HostInstance<Element, Text>,
+  eventName: string,
+  listener: any
+) {
   // Oninput already gets ommitted, because this is a special case handled by registerInputListener
-  if ((eventName === 'oninput' && hasInputEvent(instance.type, instance.props)) === false) {
+  if (
+    (eventName === "oninput" &&
+      hasInputEvent(instance.type, instance.props)) === false
+  ) {
     (instance.ref as any)[eventName] = listener;
   }
 }
@@ -118,9 +175,12 @@ function registerEventListener(instance: HostInstance<Element, Text>, eventName:
 function registerInputWatcher(instance: HostInstance<Element, Text>) {
   const onchangeWrapper = (evt: Event) => {
     let preventDefault = true;
-    let changeKey: 'value' | 'checked' = 'value';
-    if (isCheckbox(instance.type, instance.props) || isRadio(instance.type, instance.props)) {
-      changeKey = 'checked';
+    let changeKey: "value" | "checked" = "value";
+    if (
+      isCheckbox(instance.type, instance.props) ||
+      isRadio(instance.type, instance.props)
+    ) {
+      changeKey = "checked";
     }
 
     const originalSetProp = instance.setProp;
@@ -144,7 +204,9 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
     }
 
     if (preventDefault === true) {
-      ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[changeKey];
+      ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[
+        changeKey
+      ];
     }
 
     delete instance.setProp;
@@ -154,14 +216,17 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
 }
 
 function isEvent(attributeName: string) {
-  return attributeName.slice(0, 2) === 'on';
+  return attributeName.slice(0, 2) === "on";
 }
 
 /**
  * sets a special namespace, in case self is an svg, so that children will created with correct namespace
  */
 function setNamespace(instance: HostInstance<Element, Text>) {
-  const currentNamespace = instance.props.xmlns as string || getSpecialNamespace(instance.type as string) || instance.renderOptions.xmlns;
+  const currentNamespace =
+    (instance.props.xmlns as string) ||
+    getSpecialNamespace(instance.type as string) ||
+    instance.renderOptions.xmlns;
   if (currentNamespace !== instance.renderOptions.xmlns) {
     instance.renderOptions = {
       ...instance.renderOptions,
@@ -171,22 +236,30 @@ function setNamespace(instance: HostInstance<Element, Text>) {
 }
 
 const idlAttributeToPropertyMapping = {
-  readonly: 'readOnly',
+  readonly: "readOnly",
 };
 
 function getPropertyName(propertyName: string): string {
-  if (idlAttributeToPropertyMapping.hasOwnProperty(propertyName)) {
+  if (propertyName in idlAttributeToPropertyMapping) {
     return (idlAttributeToPropertyMapping as any)[propertyName];
   }
   return propertyName;
 }
 
-function setAttributeAsProperty(keyName: string): keyName is 'checked' | 'value' {
-  return keyName === 'value' || keyName === 'checked';
+function setAttributeAsProperty(
+  keyName: string
+): keyName is "checked" | "value" {
+  return keyName === "value" || keyName === "checked";
 }
 
-function getStylePropsAsAttribute(style: {[styleIndex: string]: string}): string {
-  return Object.keys(style).reduce((styleString, styleIndex) => `${styleString}${styleIndex}:${style[styleIndex]};`, '');
+function getStylePropsAsAttribute(style: {
+  [styleIndex: string]: string;
+}): string {
+  return Object.keys(style).reduce(
+    (styleString, styleIndex) =>
+      `${styleString}${styleIndex}:${style[styleIndex]};`,
+    ""
+  );
 }
 
 /**
@@ -202,14 +275,25 @@ function setSelectedIfNeeded(instance: HostInstance<Element, Text>) {
         if (isSelect((instance as HostInstance<Element, Text>).type)) {
           return true;
         }
-        throw new Error(`Nearest dom of OPTION is not a SELECT but a ${(instance as HostInstance<Element, Text>).type.toString().toUpperCase()}`);
+        throw new Error(
+          `Nearest dom of OPTION is not a SELECT but a ${(instance as HostInstance<
+            Element,
+            Text
+          >).type
+            .toString()
+            .toUpperCase()}`
+        );
       }
       return false;
     });
     if (!select) {
-      throw new Error('Could not find SELECT-Element of OPTION');
+      throw new Error("Could not find SELECT-Element of OPTION");
     }
-    instance.setProp('selected', instance.props.value === (select as HostInstance<Element, Text>).props.value);
+    instance.setProp(
+      "selected",
+      instance.props.value ===
+        (select as HostInstance<Element, Text>).props.value
+    );
   }
 }
 

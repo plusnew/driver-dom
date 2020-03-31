@@ -1,6 +1,6 @@
-import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-import { referrerpolicy } from './types/referrerpolicy';
-import { target } from './types/target';
+import { htmlGlobalAttributesElement } from "./abstract/htmlGlobalAttributesElement";
+import { referrerpolicy } from "./types/referrerpolicy";
+import { target } from "./types/target";
 type aElement = htmlGlobalAttributesElement<HTMLAnchorElement> & {
   download?: string | null;
   href?: string | null;

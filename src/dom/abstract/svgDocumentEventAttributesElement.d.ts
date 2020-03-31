@@ -1,8 +1,3 @@
-
-
-
-type svgDocumentEventAttributesElement<currentElement> = {
-  
-};
+type svgDocumentEventAttributesElement<currentElement> = {};
 
 export { svgDocumentEventAttributesElement };

@@ -1,8 +1,3 @@
-
-
-
-type svgXlinkAttributesElement<currentElement> = {
-  
-};
+type svgXlinkAttributesElement<currentElement> = {};
 
 export { svgXlinkAttributesElement };

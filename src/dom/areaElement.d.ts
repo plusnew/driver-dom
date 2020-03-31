@@ -1,5 +1,5 @@
-import { htmlGlobalAttributesElement } from './abstract/htmlGlobalAttributesElement';
-import { referrerpolicy } from './types/referrerpolicy';
+import { htmlGlobalAttributesElement } from "./abstract/htmlGlobalAttributesElement";
+import { referrerpolicy } from "./types/referrerpolicy";
 type areaElement = htmlGlobalAttributesElement<HTMLAreaElement> & {
   alt: string;
   coords?: string | null;

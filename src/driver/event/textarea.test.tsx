@@ -1,70 +1,76 @@
-import plusnew, { component, store } from '@plusnew/core';
-import driver from '../index';
+import plusnew, { component, store } from "@plusnew/core";
+import driver from "../index";
 
-describe('firing onchange events', () => {
+describe("firing onchange events", () => {
   let container: HTMLElement;
 
   beforeEach(() => {
-    container = document.createElement('div');
-    container.innerHTML = 'lots of stuff';
+    container = document.createElement("div");
+    container.innerHTML = "lots of stuff";
     document.body.appendChild(container);
   });
 
-  it('is onchange called on textarea, without revert', () => {
-    const local = store('foo', (_state, newValue: string) => newValue);
+  it("is onchange called on textarea, without revert", () => {
+    const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
-      local.dispatch(evt.currentTarget.value);
-    }).and.callThrough();
+    const change = jasmine
+      .createSpy(
+        "change",
+        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+          local.dispatch(evt.currentTarget.value);
+        }
+      )
+      .and.callThrough();
 
-    const Component = component(
-      'Component',
-      () =>
-        <local.Observer>{state =>
-          <textarea oninput={change} value={state} />
-        }</local.Observer>,
-    );
+    const Component = component("Component", () => (
+      <local.Observer>
+        {(state) => <textarea oninput={change} value={state} />}
+      </local.Observer>
+    ));
 
     plusnew.render(<Component />, { driver: driver(container) });
 
     const textarea = container.childNodes[0] as HTMLTextAreaElement;
 
-    textarea.value = 'bar';
-    const event = new CustomEvent('input', { detail: { target: textarea } });
+    textarea.value = "bar";
+    const event = new CustomEvent("input", { detail: { target: textarea } });
     textarea.dispatchEvent(event);
 
     expect(change.calls.count()).toEqual(1);
     expect(change).toHaveBeenCalledWith(event);
-    expect(local.getState()).toBe('bar');
-    expect(textarea.value).toBe('bar');
+    expect(local.getState()).toBe("bar");
+    expect(textarea.value).toBe("bar");
   });
 
-  it('is onchange called on textarea, with revert', () => {
-    const local = store('foo', (state, _newValue: string) => state);
+  it("is onchange called on textarea, with revert", () => {
+    const local = store("foo", (state, _newValue: string) => state);
 
-    const change = jasmine.createSpy('change', (evt: KeyboardEvent & { currentTarget: HTMLInputElement}) => {
-      local.dispatch(evt.currentTarget.value);
-    }).and.callThrough();
+    const change = jasmine
+      .createSpy(
+        "change",
+        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+          local.dispatch(evt.currentTarget.value);
+        }
+      )
+      .and.callThrough();
 
-    const Component = component(
-      'Component',
-      () =>
-        <local.Observer>{state =>
-          <textarea oninput={change} value={state} />
-        }</local.Observer>,
-    );
+    const Component = component("Component", () => (
+      <local.Observer>
+        {(state) => <textarea oninput={change} value={state} />}
+      </local.Observer>
+    ));
 
     plusnew.render(<Component />, { driver: driver(container) });
 
     const textarea = container.childNodes[0] as HTMLTextAreaElement;
 
-    textarea.value = 'bar';
-    const event = new CustomEvent('input', { detail: { target: textarea } });
+    textarea.value = "bar";
+    const event = new CustomEvent("input", { detail: { target: textarea } });
     textarea.dispatchEvent(event);
 
     expect(change.calls.count()).toEqual(1);
     expect(change).toHaveBeenCalledWith(event);
-    expect(local.getState()).toBe('foo');
-    expect(textarea.value).toBe('foo');
+    expect(local.getState()).toBe("foo");
+    expect(textarea.value).toBe("foo");
   });
 });

@@ -1,12 +1,12 @@
-import plusnew from '@plusnew/core';
-import HostInstance from '@plusnew/core/src/instances/types/Host/Instance';
-import RootInstance from '@plusnew/core/src/instances/types/Root/Instance';
-import driver from '../../';
+import plusnew from "@plusnew/core";
+import HostInstance from "@plusnew/core/src/instances/types/Host/Instance";
+import RootInstance from "@plusnew/core/src/instances/types/Root/Instance";
+import driver from "../../";
 
-describe('element handling', () => {
-  it('moveAfterSibling', () => {
+describe("element handling", () => {
+  it("moveAfterSibling", () => {
     expect(() => {
-      const rootElement = document.createElement('div');
+      const rootElement = document.createElement("div");
 
       const driverInstance = driver(rootElement);
 
@@ -18,27 +18,22 @@ describe('element handling', () => {
         true,
         undefined,
         () => null,
-        renderOptions,
+        renderOptions
       );
 
       const target = new HostInstance(
         <div />,
         rootInstance,
         () => null,
-        renderOptions,
+        renderOptions
       );
 
       rootElement.removeChild(rootElement.childNodes[0]);
 
       driverInstance.element.moveAfterSibling(
         target,
-        new HostInstance(
-          <div />,
-          rootInstance,
-          () => null,
-          renderOptions,
-        ),
+        new HostInstance(<div />, rootInstance, () => null, renderOptions)
       );
-    }).toThrow(new Error('Could not move orphaned node'));
+    }).toThrow(new Error("Could not move orphaned node"));
   });
 });
