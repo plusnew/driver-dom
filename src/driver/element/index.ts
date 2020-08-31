@@ -209,6 +209,9 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
       ];
     }
 
+    // When deleting this line, typescript thinks the property wouldn't exist anymore
+    // In reality we only remove it from this instance, and the setProp from the prototype-chain is still available
+    // @ts-ignore
     delete instance.setProp;
   };
 

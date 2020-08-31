@@ -1,4 +1,4 @@
-import plusnew, { component, Props, store } from "@plusnew/core";
+import plusnew, { component, Props, store } from "@plusnew/core/src";
 import driver, { ElementLifecycle } from "../..";
 
 async function tick(count: number) {

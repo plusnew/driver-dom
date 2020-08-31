@@ -1,4 +1,4 @@
-import plusnew, { Props, store, component } from "@plusnew/core";
+import plusnew, { Props, store, component } from "@plusnew/core/src";
 import driver from "./index";
 
 describe("rendering the elements", () => {

@@ -1,4 +1,4 @@
-import plusnew, { component, store } from "@plusnew/core";
+import plusnew, { component, store } from "@plusnew/core/src";
 import driver from "../index";
 
 describe("span", () => {

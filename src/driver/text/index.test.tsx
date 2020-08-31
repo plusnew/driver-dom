@@ -1,4 +1,4 @@
-import "@plusnew/core";
+import "@plusnew/core/src";
 import RootInstance from "@plusnew/core/src/instances/types/Root/Instance";
 import TextInstance from "@plusnew/core/src/instances/types/Text/Instance";
 import driver from "../../";

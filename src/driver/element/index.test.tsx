@@ -1,4 +1,4 @@
-import plusnew from "@plusnew/core";
+import plusnew from "@plusnew/core/src";
 import HostInstance from "@plusnew/core/src/instances/types/Host/Instance";
 import RootInstance from "@plusnew/core/src/instances/types/Root/Instance";
 import driver from "../../";

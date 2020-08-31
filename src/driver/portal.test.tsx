@@ -1,4 +1,4 @@
-import plusnew, { component, PortalExit, PortalEntrance } from "@plusnew/core";
+import plusnew, { component, PortalExit, PortalEntrance } from "@plusnew/core/src";
 import driver from "./";
 
 describe("rendering nested Portals", () => {
