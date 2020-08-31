@@ -1,4 +1,4 @@
-import plusnew, { component, store, Store } from "@plusnew/core/src";
+import plusnew, { component, store, Store } from "@plusnew/core/src/index";
 import driver, { Idle } from "../..";
 
 describe("<Idle />", () => {

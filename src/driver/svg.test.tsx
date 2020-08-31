@@ -3,7 +3,7 @@ import plusnew, {
   store,
   PortalExit,
   PortalEntrance,
-} from "@plusnew/core/src";
+} from "@plusnew/core/src/index";
 import driver from "./index";
 
 const htmlNamespace = "http://www.w3.org/1999/xhtml";

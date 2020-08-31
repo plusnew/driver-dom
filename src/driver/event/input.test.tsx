@@ -1,4 +1,4 @@
-import plusnew, { component, store } from "@plusnew/core/src";
+import plusnew, { component, store } from "@plusnew/core/src/index";
 import driver from "../index";
 
 describe("firing input events", () => {
