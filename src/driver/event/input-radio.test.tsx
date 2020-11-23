@@ -49,9 +49,10 @@ describe("firing input events", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    const [firstRadio, secondRadio] = container.childNodes as NodeListOf<
-      HTMLInputElement
-    >;
+    const [
+      firstRadio,
+      secondRadio,
+    ] = container.childNodes as NodeListOf<HTMLInputElement>;
 
     expect(firstRadio.checked).toBe(true);
     expect(secondRadio.checked).toBe(false);
@@ -106,9 +107,10 @@ describe("firing input events", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    const [firstRadio, secondRadio] = container.childNodes as NodeListOf<
-      HTMLInputElement
-    >;
+    const [
+      firstRadio,
+      secondRadio,
+    ] = container.childNodes as NodeListOf<HTMLInputElement>;
 
     expect(firstRadio.checked).toBe(true);
     expect(secondRadio.checked).toBe(false);

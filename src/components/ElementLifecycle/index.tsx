@@ -38,7 +38,7 @@ const ElementLifecycle: ComponentContainer<props, Element, Text> = component(
             >).elementWillUnmount(element);
 
             if (parentWait) {
-              return new Promise((resolve) => {
+              return new Promise<void>((resolve) => {
                 (parentWait as Promise<any>).then(() => {
                   const elementWillUnmount = instance.props.elementWillUnmount;
                   if (elementWillUnmount) {

@@ -3,7 +3,7 @@ import driver, { ElementLifecycle } from "../..";
 
 async function tick(count: number) {
   for (let i = 0; i < count; i += 1) {
-    await new Promise((resolve) => resolve());
+    await new Promise<void>((resolve) => resolve());
   }
 }
 
@@ -128,7 +128,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolve = () => {};
-        const unmountPromise = new Promise((resolve) => {
+        const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
         const willUnmountSpy = jasmine
@@ -168,7 +168,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolve = () => {};
-        const unmountPromise = new Promise((resolve) => {
+        const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
         const willUnmountSpy = jasmine
@@ -213,7 +213,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolve = () => {};
-        const unmountPromise = new Promise((resolve) => {
+        const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
         const willUnmountSpy = jasmine
@@ -258,7 +258,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolve = () => {};
-        const unmountPromise = new Promise((resolve) => {
+        const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
         const willUnmountSpy = jasmine
@@ -318,12 +318,12 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolveParent = () => {};
-        const unmountPromiseParent = new Promise((resolve) => {
+        const unmountPromiseParent = new Promise<void>((resolve) => {
           promiseResolveParent = resolve;
         });
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolveChild = () => {};
-        const unmountPromiseChild = new Promise((resolve) => {
+        const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
         const willUnmountSpyParent = jasmine
@@ -390,7 +390,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolveChild = () => {};
-        const unmountPromiseChild = new Promise((resolve) => {
+        const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
         const willUnmountSpyParent = jasmine
@@ -443,7 +443,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolveChild = () => {};
-        const unmountPromiseChild = new Promise((resolve) => {
+        const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
         const willUnmountSpyChild = jasmine
@@ -488,7 +488,7 @@ describe("<ElementLifecycle />", () => {
         const local = store(true, (_state, action: boolean) => action);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         let promiseResolve = () => {};
-        const unmountPromise = new Promise((resolve) => {
+        const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
         const willUnmountSpy = jasmine
@@ -539,7 +539,7 @@ describe("<ElementLifecycle />", () => {
       const local = store(true, (_state, action: boolean) => action);
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       let promiseResolve = () => {};
-      const unmountPromise = new Promise((resolve) => {
+      const unmountPromise = new Promise<void>((resolve) => {
         promiseResolve = resolve;
       });
       const willUnmountSpy = jasmine
