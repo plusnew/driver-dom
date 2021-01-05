@@ -36,4 +36,11 @@ describe("element handling", () => {
       );
     }).toThrow(new Error("Could not move orphaned node"));
   });
+
+  // To be removed after @plusnew/core update
+  it("stub test for dealloc", () => {
+    const rootElement = document.createElement("div");
+
+    (driver(rootElement).element as any).dealloc();
+  });
 });

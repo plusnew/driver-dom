@@ -27,7 +27,7 @@ function insertAfter(
 
 const removeValues = [undefined, null];
 
-const element: IDriver<Element, Text>["element"] = {
+const element: IDriver<Element, Text>["element"] & { dealloc: () => void } = {
   create: (domInstance) => {
     setNamespace(domInstance);
     if (domInstance.renderOptions.xmlns) {
@@ -41,6 +41,7 @@ const element: IDriver<Element, Text>["element"] = {
   remove: (domInstance) => {
     domInstance.ref.remove();
   },
+  dealloc: () => null,
   setAttribute: (domInstance, idlAttributeName, attributeValue) => {
     if (removeValues.includes(attributeValue)) {
       element.unsetAttribute(domInstance, idlAttributeName);
