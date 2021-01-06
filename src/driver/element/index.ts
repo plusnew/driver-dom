@@ -27,7 +27,7 @@ function insertAfter(
 
 const removeValues = [undefined, null];
 
-const element: IDriver<Element, Text>["element"] & { dealloc: () => void } = {
+const element: IDriver<Element, Text>["element"] = {
   create: (domInstance) => {
     setNamespace(domInstance);
     if (domInstance.renderOptions.xmlns) {
@@ -41,14 +41,20 @@ const element: IDriver<Element, Text>["element"] & { dealloc: () => void } = {
   remove: (domInstance) => {
     domInstance.ref.remove();
   },
-  dealloc: () => null,
+  dealloc: (domInstance) => {
+    Object.keys(domInstance.props)
+      .filter((attributeName) => isEvent(attributeName))
+      .forEach((attributeName) =>
+        removeEventListener(domInstance, attributeName)
+      );
+  },
   setAttribute: (domInstance, idlAttributeName, attributeValue) => {
     if (removeValues.includes(attributeValue)) {
       element.unsetAttribute(domInstance, idlAttributeName);
     } else {
       if (idlAttributeName.indexOf(":") === -1) {
         if (isEvent(idlAttributeName)) {
-          registerEventListener(domInstance, idlAttributeName, attributeValue);
+          addEventListener(domInstance, idlAttributeName, attributeValue);
         } else {
           if (attributeValue === false || attributeValue === true) {
             const propertyAttributeName = getPropertyName(idlAttributeName);
@@ -108,7 +114,7 @@ const element: IDriver<Element, Text>["element"] & { dealloc: () => void } = {
   },
   unsetAttribute: (domInstance, attributeName) => {
     if (isEvent(attributeName)) {
-      (domInstance.ref as any)[attributeName] = null;
+      removeEventListener(domInstance, attributeName);
     } else {
       const idlAttributeName = getPropertyName(attributeName);
 
@@ -159,20 +165,35 @@ const element: IDriver<Element, Text>["element"] & { dealloc: () => void } = {
   },
 };
 
-function registerEventListener(
+function addEventListener(
   instance: HostInstance<Element, Text>,
-  eventName: string,
+  attributeName: string,
   listener: any
 ) {
   // Oninput already gets ommitted, because this is a special case handled by registerInputListener
   if (
-    (eventName === "oninput" &&
+    (attributeName === "oninput" &&
       hasInputEvent(instance.type, instance.props)) === false
   ) {
-    (instance.ref as any)[eventName] = listener;
+    if (instance.props[attributeName]) {
+      removeEventListener(instance, attributeName);
+    }
+    (instance.ref as any).addEventListener(
+      getEventName(attributeName),
+      listener
+    );
   }
 }
 
+function removeEventListener(
+  instance: HostInstance<Element, Text>,
+  attributeName: string
+) {
+  (instance.ref as Element).removeEventListener(
+    getEventName(attributeName),
+    (instance.props as any)[attributeName]
+  );
+}
 function registerInputWatcher(instance: HostInstance<Element, Text>) {
   const onchangeWrapper = (evt: Event) => {
     let preventDefault = true;
@@ -222,7 +243,9 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
 function isEvent(attributeName: string) {
   return attributeName.slice(0, 2) === "on";
 }
-
+function getEventName(attributeName: string) {
+  return attributeName.slice(2);
+}
 /**
  * sets a special namespace, in case self is an svg, so that children will created with correct namespace
  */

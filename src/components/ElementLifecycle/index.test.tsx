@@ -592,10 +592,13 @@ describe("<ElementLifecycle />", () => {
       expect(container.childNodes.length).toBe(0);
     });
 
-    it("elementWillUnmount gets not called with node, when parent-dom gets removed", async () => {
+    it("elementWillUnmount gets called with node, when parent-dom gets removed, but parent doesnt wait to remove element", async () => {
       const local = store(true, (_state, action: boolean) => action);
       const willUnmountSpy = jasmine
-        .createSpy("willUnmount", (_element: Element) => {}) // eslint-disable-line @typescript-eslint/no-empty-function
+        .createSpy(
+          "willUnmount",
+          (_element: Element) => new Promise<void>((resolve) => resolve())
+        )
         .and.callThrough();
 
       const Component = component("Component", () => (
@@ -625,7 +628,7 @@ describe("<ElementLifecycle />", () => {
 
       local.dispatch(false);
 
-      expect(willUnmountSpy.calls.count()).toBe(0);
+      expect(willUnmountSpy.calls.count()).toBe(1);
       expect(container.childNodes.length).toBe(0);
     });
 

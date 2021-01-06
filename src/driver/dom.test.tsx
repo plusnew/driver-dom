@@ -61,16 +61,58 @@ describe("dom handling", () => {
   });
 
   it("correct handling of onclick", () => {
-    const clickHandler = () => null;
+    const local = store(true);
+    const clickHandler = jasmine.createSpy("clickSpy");
+    const anotherClickHandler = jasmine.createSpy("anotherClickSpy");
 
     const Component = component("Component", () => (
-      <span onclick={clickHandler} />
+      <local.Observer>
+        {(localState) => (
+          <span onclick={localState ? clickHandler : anotherClickHandler} />
+        )}
+      </local.Observer>
     ));
     plusnew.render(<Component />, { driver: driver(container) });
 
     const target = container.childNodes[0] as HTMLMetaElement;
 
-    expect(target.onclick).toBe(clickHandler);
+    const clickEvent = new Event("click");
+    target.dispatchEvent(clickEvent);
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(clickHandler).toHaveBeenCalledWith(clickEvent);
+
+    local.dispatch(false);
+
+    const anotherClickEvent = new Event("click");
+    target.dispatchEvent(anotherClickEvent);
+
+    // The old clickhandler should have been removed, and cant be called again
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(anotherClickHandler).toHaveBeenCalledTimes(1);
+    expect(anotherClickHandler).toHaveBeenCalledWith(anotherClickEvent);
+  });
+
+  it("event handling of onclick when nothing was selected before", () => {
+    const local = store(false);
+    const clickHandler = jasmine.createSpy("clickSpy");
+
+    const Component = component("Component", () => (
+      <local.Observer>
+        {(localState) => (
+          <span onclick={localState ? clickHandler : undefined} />
+        )}
+      </local.Observer>
+    ));
+    plusnew.render(<Component />, { driver: driver(container) });
+
+    const target = container.childNodes[0] as HTMLMetaElement;
+
+    local.dispatch(true);
+
+    const clickEvent = new Event("click");
+    target.dispatchEvent(clickEvent);
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(clickHandler).toHaveBeenCalledWith(clickEvent);
   });
 
   it("correct handling of viewBox", () => {
