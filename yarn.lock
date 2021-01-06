@@ -521,10 +521,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@plusnew/core@^1.5.1":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.5.3.tgz#05255ca9a5227a6d355baa23945c0eaa52013f32"
-  integrity sha512-pWctwjQmQpLBVEmIOsA3+Z05schiihSn+MDjKq1koLDEpqHBYdYQvihMoobKka1+mg/dgmlzmiyX4dO7iIHTBg==
+"@plusnew/core@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@plusnew/core/-/core-1.6.1.tgz#61a25ce07fab83623b043caca0d4b880b78ef68a"
+  integrity sha512-ydgTXgY4mJRJ4t2GjlJditdvbKYbUiinfBlarNgo+7AJ4M8Ms4q7mHxL6PyRoZUbSeUXpoKIVatpWx30h0WHDA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.7.1"
