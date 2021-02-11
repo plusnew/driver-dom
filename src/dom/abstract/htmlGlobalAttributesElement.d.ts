@@ -11,6 +11,9 @@ type htmlGlobalAttributesElement<currentElement> = {
   onautocompleteerror?:
     | ((event: Event & { currentTarget: currentElement }) => void)
     | null;
+  onbeforeinput?:
+    | ((event: InputEvent & { currentTarget: currentElement }) => void)
+    | null;
   onblur?:
     | ((event: FocusEvent & { currentTarget: currentElement }) => void)
     | null;
@@ -34,6 +37,15 @@ type htmlGlobalAttributesElement<currentElement> = {
   onclose?: ((event: Event & { currentTarget: currentElement }) => void) | null;
   oncontextmenu?:
     | ((event: PointerEvent & { currentTarget: currentElement }) => void)
+    | null;
+  oncompositionstart?:
+    | ((event: CompositionEvent & { currentTarget: currentElement }) => void)
+    | null;
+  oncompositionupdate?:
+    | ((event: CompositionEvent & { currentTarget: currentElement }) => void)
+    | null;
+  oncompositionend?:
+    | ((event: CompositionEvent & { currentTarget: currentElement }) => void)
     | null;
   oncuechange?:
     | ((event: Event & { currentTarget: currentElement }) => void)
@@ -76,6 +88,12 @@ type htmlGlobalAttributesElement<currentElement> = {
     | ((event: ErrorEvent & { currentTarget: currentElement }) => void)
     | null;
   onfocus?:
+    | ((event: FocusEvent & { currentTarget: currentElement }) => void)
+    | null;
+  onfocusin?:
+    | ((event: FocusEvent & { currentTarget: currentElement }) => void)
+    | null;
+  onfocusout?:
     | ((event: FocusEvent & { currentTarget: currentElement }) => void)
     | null;
   oninput?: ((event: Event & { currentTarget: currentElement }) => void) | null;
@@ -186,6 +204,9 @@ type htmlGlobalAttributesElement<currentElement> = {
     | null;
   onwaiting?:
     | ((event: Event & { currentTarget: currentElement }) => void)
+    | null;
+  onwheel?:
+    | ((event: WheelEvent & { currentTarget: currentElement }) => void)
     | null;
   accesskey?: string | null;
   autocapitalize?:
