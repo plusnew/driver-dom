@@ -2,7 +2,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": [
     "@typescript-eslint",
@@ -27,9 +28,13 @@
     "no-unused-vars": "off", // necessary for import jsx components/modules
     "@typescript-eslint/no-unused-vars": "off", // necessary for import jsx components/modules
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-namespace": "off",
+    "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/restrict-template-expressions": "error",
+    "@typescript-eslint/consistent-type-imports": "error"
   }
 }
