@@ -1,6 +1,6 @@
 {
   "name": "@plusnew/driver-dom",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "plusnew driver for the browser",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/plusnew/driver-dom#readme",
   "dependencies": {},
   "devDependencies": {
-    "@plusnew/core": "^1.6.3",
+    "@plusnew/core": "^1.6.4",
     "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
