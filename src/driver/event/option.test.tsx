@@ -13,14 +13,11 @@ describe("firing onchange events", () => {
   it("is onchange called on select, without revert", () => {
     const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLSelectElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -41,7 +38,7 @@ describe("firing onchange events", () => {
     const event = new CustomEvent("input", { detail: { target: select } });
     select.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("bar");
     expect(select.value).toBe("bar");
@@ -73,14 +70,11 @@ describe("firing onchange events", () => {
     const local = store("bar", (_state, newValue: string) => newValue);
     const showOption = store(false);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLSelectElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -106,26 +100,23 @@ describe("firing onchange events", () => {
 
     const select = container.childNodes[0] as HTMLSelectElement;
 
-    expect(change.calls.count()).toEqual(0);
+    expect(change).toHaveBeenCalledTimes(0);
     expect(select.value).toBe("foo");
 
     showOption.dispatch(true);
 
-    expect(change.calls.count()).toEqual(0);
+    expect(change).toHaveBeenCalledTimes(0);
     expect(select.value).toBe("bar");
   });
 
   it("is onchange called on select, with revert", () => {
     const local = store("foo", (state, _newValue: string) => state);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLSelectElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -146,7 +137,7 @@ describe("firing onchange events", () => {
     const event = new CustomEvent("input", { detail: { target: select } });
     select.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("foo");
     expect(select.value).toBe("foo");

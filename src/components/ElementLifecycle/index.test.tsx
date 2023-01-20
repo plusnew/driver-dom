@@ -1,4 +1,5 @@
-import plusnew, { component, Props, store } from "@plusnew/core/src/index";
+import type { Props } from "@plusnew/core/src/index";
+import plusnew, { component, store } from "@plusnew/core/src/index";
 import driver, { ElementLifecycle } from "../..";
 
 async function tick(count: number) {
@@ -19,10 +20,7 @@ describe("<ElementLifecycle />", () => {
   describe("elementDidMount", () => {
     describe("flat", () => {
       it("elementDidMount gets called with node", () => {
-        const didMountSpy = jasmine.createSpy(
-          "didMount",
-          (_element: Element) => null
-        );
+        const didMountSpy = jest.fn((_element: Element) => null);
         const Component = component("Component", () => (
           <ElementLifecycle elementDidMount={didMountSpy}>
             <div />
@@ -33,17 +31,14 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(didMountSpy.calls.count()).toBe(1);
+        expect(didMountSpy).toHaveBeenCalledTimes(1);
         expect(didMountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
         );
       });
 
       it("elementDidMount gets called with nodes", () => {
-        const didMountSpy = jasmine.createSpy(
-          "didMount",
-          (_element: Element) => null
-        );
+        const didMountSpy = jest.fn((_element: Element) => null);
         const Component = component("Component", () => (
           <ElementLifecycle elementDidMount={didMountSpy}>
             <div />
@@ -56,7 +51,7 @@ describe("<ElementLifecycle />", () => {
         expect(container.childNodes.length).toBe(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
-        expect(didMountSpy.calls.count()).toBe(2);
+        expect(didMountSpy).toHaveBeenCalledTimes(2);
         expect(didMountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
         );
@@ -68,10 +63,7 @@ describe("<ElementLifecycle />", () => {
 
     describe("nested", () => {
       it("elementDidMount gets called with node", () => {
-        const didMountSpy = jasmine.createSpy(
-          "didMount",
-          (_element: Element) => null
-        );
+        const didMountSpy = jest.fn((_element: Element) => null);
         const Component = component("Component", () => (
           <ElementLifecycle elementDidMount={didMountSpy}>
             <div>
@@ -84,17 +76,14 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(didMountSpy.calls.count()).toBe(1);
+        expect(didMountSpy).toHaveBeenCalledTimes(1);
         expect(didMountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
         );
       });
 
       it("elementDidMount gets called with nodes", () => {
-        const didMountSpy = jasmine.createSpy(
-          "didMount",
-          (_element: Element) => null
-        );
+        const didMountSpy = jest.fn((_element: Element) => null);
         const Component = component("Component", () => (
           <ElementLifecycle elementDidMount={didMountSpy}>
             <div>
@@ -111,7 +100,7 @@ describe("<ElementLifecycle />", () => {
         expect(container.childNodes.length).toBe(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
-        expect(didMountSpy.calls.count()).toBe(2);
+        expect(didMountSpy).toHaveBeenCalledTimes(2);
         expect(didMountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
         );
@@ -131,9 +120,7 @@ describe("<ElementLifecycle />", () => {
         const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
-        const willUnmountSpy = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromise)
-          .and.callThrough();
+        const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpy}>
             <local.Observer>{(state) => state && <div />}</local.Observer>
@@ -144,11 +131,11 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpy.calls.count()).toBe(0);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpy.calls.count()).toBe(1);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -171,9 +158,7 @@ describe("<ElementLifecycle />", () => {
         const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
-        const willUnmountSpy = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromise)
-          .and.callThrough();
+        const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpy}>
             <local.Observer>{(state) => state && <div />}</local.Observer>
@@ -186,11 +171,11 @@ describe("<ElementLifecycle />", () => {
         expect(container.childNodes.length).toBe(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
-        expect(willUnmountSpy.calls.count()).toBe(0);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpy.calls.count()).toBe(2);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
         expect(willUnmountSpy).toHaveBeenCalledWith(
@@ -216,9 +201,7 @@ describe("<ElementLifecycle />", () => {
         const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
-        const willUnmountSpy = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromise)
-          .and.callThrough();
+        const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpy}>
             <local.Observer>
@@ -237,11 +220,11 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpy.calls.count()).toBe(0);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpy.calls.count()).toBe(1);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -261,9 +244,7 @@ describe("<ElementLifecycle />", () => {
         const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
-        const willUnmountSpy = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromise)
-          .and.callThrough();
+        const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpy}>
             <local.Observer>
@@ -293,11 +274,11 @@ describe("<ElementLifecycle />", () => {
         expect(container.childNodes.length).toBe(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
-        expect(willUnmountSpy.calls.count()).toBe(0);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpy.calls.count()).toBe(2);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(2);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect((container.childNodes[1] as HTMLElement).tagName).toBe("SPAN");
         expect(willUnmountSpy).toHaveBeenCalledWith(
@@ -326,15 +307,13 @@ describe("<ElementLifecycle />", () => {
         const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
-        const willUnmountSpyParent = jasmine
-          .createSpy(
-            "willUnmountParent",
-            (_element: Element) => unmountPromiseParent
-          )
-          .and.callThrough();
-        const willUnmountSpyChild = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromiseChild)
-          .and.callThrough();
+        const willUnmountSpyParent = jest.fn(
+          (_element: Element) => unmountPromiseParent
+        );
+
+        const willUnmountSpyChild = jest.fn(
+          (_element: Element) => unmountPromiseChild
+        );
 
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpyParent}>
@@ -356,13 +335,13 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpyParent.calls.count()).toBe(0);
-        expect(willUnmountSpyChild.calls.count()).toBe(0);
+        expect(willUnmountSpyParent).toHaveBeenCalledTimes(0);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpyParent.calls.count()).toBe(1);
-        expect(willUnmountSpyChild.calls.count()).toBe(0);
+        expect(willUnmountSpyParent).toHaveBeenCalledTimes(1);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(0);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpyParent).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -372,8 +351,8 @@ describe("<ElementLifecycle />", () => {
         promiseResolveParent();
         await tick(1);
 
-        expect(willUnmountSpyParent.calls.count()).toBe(1);
-        expect(willUnmountSpyChild.calls.count()).toBe(1);
+        expect(willUnmountSpyParent).toHaveBeenCalledTimes(1);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpyChild).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -393,12 +372,11 @@ describe("<ElementLifecycle />", () => {
         const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
-        const willUnmountSpyParent = jasmine
-          .createSpy("willUnmountParent", (_element: Element) => {}) // eslint-disable-line @typescript-eslint/no-empty-function
-          .and.callThrough();
-        const willUnmountSpyChild = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromiseChild)
-          .and.callThrough();
+        const willUnmountSpyParent = jest.fn((_element: Element) => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+
+        const willUnmountSpyChild = jest.fn(
+          (_element: Element) => unmountPromiseChild
+        );
 
         const Component = component("Component", () => (
           <ElementLifecycle elementWillUnmount={willUnmountSpyParent}>
@@ -420,13 +398,13 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpyParent.calls.count()).toBe(0);
-        expect(willUnmountSpyChild.calls.count()).toBe(0);
+        expect(willUnmountSpyParent).toHaveBeenCalledTimes(0);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpyParent.calls.count()).toBe(1);
-        expect(willUnmountSpyChild.calls.count()).toBe(1);
+        expect(willUnmountSpyParent).toHaveBeenCalledTimes(1);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpyParent).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -446,9 +424,9 @@ describe("<ElementLifecycle />", () => {
         const unmountPromiseChild = new Promise<void>((resolve) => {
           promiseResolveChild = resolve;
         });
-        const willUnmountSpyChild = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromiseChild)
-          .and.callThrough();
+        const willUnmountSpyChild = jest.fn(
+          (_element: Element) => unmountPromiseChild
+        );
 
         const Component = component("Component", () => (
           <ElementLifecycle>
@@ -470,11 +448,11 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpyChild.calls.count()).toBe(0);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpyChild.calls.count()).toBe(1);
+        expect(willUnmountSpyChild).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
 
         await tick(1);
@@ -491,9 +469,7 @@ describe("<ElementLifecycle />", () => {
         const unmountPromise = new Promise<void>((resolve) => {
           promiseResolve = resolve;
         });
-        const willUnmountSpy = jasmine
-          .createSpy("willUnmount", (_element: Element) => unmountPromise)
-          .and.callThrough();
+        const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
         const Component = component("Component", () => (
           <>
             <local.Observer>
@@ -514,11 +490,11 @@ describe("<ElementLifecycle />", () => {
 
         expect(container.childNodes.length).toBe(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-        expect(willUnmountSpy.calls.count()).toBe(0);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
         local.dispatch(false);
 
-        expect(willUnmountSpy.calls.count()).toBe(1);
+        expect(willUnmountSpy).toHaveBeenCalledTimes(1);
         expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
         expect(willUnmountSpy).toHaveBeenCalledWith(
           container.childNodes[0] as Element
@@ -542,9 +518,8 @@ describe("<ElementLifecycle />", () => {
       const unmountPromise = new Promise<void>((resolve) => {
         promiseResolve = resolve;
       });
-      const willUnmountSpy = jasmine
-        .createSpy("willUnmount", (_element: Element) => unmountPromise)
-        .and.callThrough();
+      const willUnmountSpy = jest.fn((_element: Element) => unmountPromise);
+
       const ProxyComponent = component(
         "ProxyComponent",
         (Props: Props<{ children: any }>) => (
@@ -572,11 +547,11 @@ describe("<ElementLifecycle />", () => {
 
       expect(container.childNodes.length).toBe(1);
       expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
-      expect(willUnmountSpy.calls.count()).toBe(0);
+      expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
       local.dispatch(false);
 
-      expect(willUnmountSpy.calls.count()).toBe(1);
+      expect(willUnmountSpy).toHaveBeenCalledTimes(1);
       expect((container.childNodes[0] as HTMLElement).tagName).toBe("DIV");
       expect(willUnmountSpy).toHaveBeenCalledWith(
         container.childNodes[0] as Element
@@ -594,12 +569,9 @@ describe("<ElementLifecycle />", () => {
 
     it("elementWillUnmount gets called with node, when parent-dom gets removed, but parent doesnt wait to remove element", async () => {
       const local = store(true, (_state, action: boolean) => action);
-      const willUnmountSpy = jasmine
-        .createSpy(
-          "willUnmount",
-          (_element: Element) => new Promise<void>((resolve) => resolve())
-        )
-        .and.callThrough();
+      const willUnmountSpy = jest.fn(
+        (_element: Element) => new Promise<void>((resolve) => resolve())
+      );
 
       const Component = component("Component", () => (
         <>
@@ -624,11 +596,11 @@ describe("<ElementLifecycle />", () => {
       expect(
         (container.childNodes[0].childNodes[0] as HTMLElement).tagName
       ).toBe("DIV");
-      expect(willUnmountSpy.calls.count()).toBe(0);
+      expect(willUnmountSpy).toHaveBeenCalledTimes(0);
 
       local.dispatch(false);
 
-      expect(willUnmountSpy.calls.count()).toBe(1);
+      expect(willUnmountSpy).toHaveBeenCalledTimes(1);
       expect(container.childNodes.length).toBe(0);
     });
 

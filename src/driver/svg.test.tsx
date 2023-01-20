@@ -23,7 +23,9 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(htmlNamespace);
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      htmlNamespace
+    );
   });
 
   it("check if nested div element has correct namespace", () => {
@@ -35,10 +37,12 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(htmlNamespace);
-    expect((container.childNodes[0].childNodes[0] as Element).namespaceURI).toBe(
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
       htmlNamespace
     );
+    expect(
+      (container.childNodes[0].childNodes[0] as Element).namespaceURI
+    ).toBe(htmlNamespace);
   });
 
   it("check if svg element has correct namespace", () => {
@@ -46,7 +50,9 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(svgNamespace);
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      svgNamespace
+    );
   });
 
   it("check if svg element has correct namespace", () => {
@@ -66,10 +72,12 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(htmlNamespace);
-    expect((container.childNodes[0].childNodes[0] as Element).namespaceURI).toBe(
-      svgNamespace
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      htmlNamespace
     );
+    expect(
+      (container.childNodes[0].childNodes[0] as Element).namespaceURI
+    ).toBe(svgNamespace);
   });
 
   it("check if nested element in svg element has correct namespace", () => {
@@ -81,10 +89,12 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(svgNamespace);
-    expect((container.childNodes[0].childNodes[0] as Element).namespaceURI).toBe(
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
       svgNamespace
     );
+    expect(
+      (container.childNodes[0].childNodes[0] as Element).namespaceURI
+    ).toBe(svgNamespace);
   });
 
   it("check if nested element in svg element has correct namespace", () => {
@@ -98,12 +108,15 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(svgNamespace);
-    expect((container.childNodes[0].childNodes[0] as Element).namespaceURI).toBe(
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
       svgNamespace
     );
     expect(
-     ( container.childNodes[0].childNodes[0].childNodes[0] as Element).namespaceURI
+      (container.childNodes[0].childNodes[0] as Element).namespaceURI
+    ).toBe(svgNamespace);
+    expect(
+      (container.childNodes[0].childNodes[0].childNodes[0] as Element)
+        .namespaceURI
     ).toBe(htmlNamespace);
   });
 
@@ -115,7 +128,9 @@ describe("rendering svg components", () => {
       driver: driver(container),
     });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(svgNamespace);
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      svgNamespace
+    );
   });
 
   it("check if dom element has correct namespace, after replacement from svg", () => {
@@ -128,11 +143,15 @@ describe("rendering svg components", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(svgNamespace);
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      svgNamespace
+    );
 
     local.dispatch(false);
 
-    expect((container.childNodes[0] as Element).namespaceURI).toBe(htmlNamespace);
+    expect((container.childNodes[0] as Element).namespaceURI).toBe(
+      htmlNamespace
+    );
   });
 
   it("check if namespace prefix is set correctly", () => {

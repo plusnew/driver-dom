@@ -11,7 +11,7 @@ describe("span", () => {
   });
 
   it("firing click events, and removing them", () => {
-    const click = jasmine.createSpy("click");
+    const click = jest.fn();
     const local = store<typeof click | undefined>(click);
     const Component = component("Component", () => (
       <local.Observer>
@@ -35,8 +35,8 @@ describe("span", () => {
   });
 
   it("firing click events, and replacing them", () => {
-    const click = jasmine.createSpy("click");
-    const anotherClick = jasmine.createSpy("anotherClick");
+    const click = jest.fn();
+    const anotherClick = jest.fn();
     const local = store<typeof click>(click);
     const Component = component("Component", () => (
       <local.Observer>

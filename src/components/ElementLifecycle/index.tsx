@@ -1,7 +1,5 @@
-import plusnew, {
-  component,
-  ComponentContainer,
-} from "@plusnew/core/src/index";
+import type { ComponentContainer } from "@plusnew/core/src/index";
+import plusnew, { component } from "@plusnew/core/src/index";
 import type Instance from "@plusnew/core/src/instances/types/Component/Instance";
 
 type props = {
@@ -17,11 +15,9 @@ const ElementLifecycle: ComponentContainer<props, Element, Text> = component(
       <Props>
         {(props) => {
           instance.elementDidMount = (element: Element) => {
-            (instance.parentInstance as Instance<
-              props,
-              Element,
-              Text
-            >).elementDidMount(element);
+            (
+              instance.parentInstance as Instance<props, Element, Text>
+            ).elementDidMount(element);
             if (props.elementDidMount) {
               props.elementDidMount(element);
             }
@@ -31,11 +27,9 @@ const ElementLifecycle: ComponentContainer<props, Element, Text> = component(
             element: Element
           ): Promise<any> | void => {
             let parentWait: void | Promise<any> = undefined;
-            parentWait = (instance.parentInstance as Instance<
-              props,
-              Element,
-              Text
-            >).elementWillUnmount(element);
+            parentWait = (
+              instance.parentInstance as Instance<props, Element, Text>
+            ).elementWillUnmount(element);
 
             if (parentWait) {
               return new Promise<void>((resolve) => {

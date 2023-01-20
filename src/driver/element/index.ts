@@ -65,7 +65,7 @@ const element: IDriver<Element, Text>["element"] = {
               "style",
               getStylePropsAsAttribute(attributeValue)
             );
-          } else if (setAttributeAsProperty(idlAttributeName)) {
+          } else if (setAttributeAsProperty(domInstance, idlAttributeName)) {
             const propertyAttributeName = getPropertyName(idlAttributeName);
 
             // Properties like value or checked, need to be set as a property, not as an attribute
@@ -76,10 +76,8 @@ const element: IDriver<Element, Text>["element"] = {
           }
         }
       } else {
-        const [
-          namespacePrefix,
-          namespacedidlAttributeName,
-        ] = idlAttributeName.split(":");
+        const [namespacePrefix, namespacedidlAttributeName] =
+          idlAttributeName.split(":");
         if (namespacePrefix === "xmlns") {
           // @TODO add disallow changing this value
           domInstance.renderOptions = {
@@ -226,13 +224,13 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
     }
 
     if (preventDefault === true) {
-      ((instance.ref as HTMLInputElement)[changeKey] as any) = instance.props[
-        changeKey
-      ];
+      ((instance.ref as HTMLInputElement)[changeKey] as any) =
+        instance.props[changeKey];
     }
 
     // When deleting this line, typescript thinks the property wouldn't exist anymore
     // In reality we only remove it from this instance, and the setProp from the prototype-chain is still available
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete instance.setProp;
   };
@@ -274,9 +272,19 @@ function getPropertyName(propertyName: string): string {
 }
 
 function setAttributeAsProperty(
+  domInstance: HostInstance<Element, Text>,
   keyName: string
 ): keyName is "checked" | "value" {
-  return keyName === "value" || keyName === "checked";
+  const isCustomElement = domInstance.type.indexOf("-") !== -1;
+
+  if (isCustomElement) {
+    return keyName in domInstance.ref;
+  } else {
+    return (
+      domInstance.type === "input" &&
+      (keyName === "value" || keyName === "checked")
+    );
+  }
 }
 
 function getStylePropsAsAttribute(style: {
@@ -303,10 +311,9 @@ function setSelectedIfNeeded(instance: HostInstance<Element, Text>) {
           return true;
         }
         throw new Error(
-          `Nearest dom of OPTION is not a SELECT but a ${(instance as HostInstance<
-            Element,
-            Text
-          >).type
+          `Nearest dom of OPTION is not a SELECT but a ${(
+            instance as HostInstance<Element, Text>
+          ).type
             .toString()
             .toUpperCase()}`
         );

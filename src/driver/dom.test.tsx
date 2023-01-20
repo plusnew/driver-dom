@@ -62,8 +62,8 @@ describe("dom handling", () => {
 
   it("correct handling of onclick", () => {
     const local = store(true);
-    const clickHandler = jasmine.createSpy("clickSpy");
-    const anotherClickHandler = jasmine.createSpy("anotherClickSpy");
+    const clickHandler = jest.fn();
+    const anotherClickHandler = jest.fn();
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -94,7 +94,7 @@ describe("dom handling", () => {
 
   it("event handling of onclick when nothing was selected before", () => {
     const local = store(false);
-    const clickHandler = jasmine.createSpy("clickSpy");
+    const clickHandler = jest.fn();
 
     const Component = component("Component", () => (
       <local.Observer>

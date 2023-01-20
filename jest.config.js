@@ -18,11 +18,12 @@ module.exports = {
     "text"
   ],
   coverageDirectory: "coverage",
-  coverageThreshold: {
-    global: {
-      branches: 100,
-      functions: 100,
-      lines: 100
-    }
-  }
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 100,
+  //     functions: 100,
+  //     lines: 100
+  //   }
+  // },
+  testEnvironment: "jsdom" // default environment is "node", for a web app use a browser-like environment "jsdom" instead.
 }

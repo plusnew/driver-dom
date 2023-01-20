@@ -13,14 +13,11 @@ describe("firing input events", () => {
   it("is oninput called on radio, without revert", () => {
     const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -49,10 +46,8 @@ describe("firing input events", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    const [
-      firstRadio,
-      secondRadio,
-    ] = container.childNodes as NodeListOf<HTMLInputElement>;
+    const [firstRadio, secondRadio] =
+      container.childNodes as NodeListOf<HTMLInputElement>;
 
     expect(firstRadio.checked).toBe(true);
     expect(secondRadio.checked).toBe(false);
@@ -61,7 +56,7 @@ describe("firing input events", () => {
     const event = new CustomEvent("input", { detail: { target: secondRadio } });
     secondRadio.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("bar");
     expect(firstRadio.checked).toBe(false);
@@ -71,14 +66,11 @@ describe("firing input events", () => {
   it("is oninput called on radio, with revert", () => {
     const local = store("foo", (state, _newValue: string) => state);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -107,10 +99,8 @@ describe("firing input events", () => {
 
     plusnew.render(<Component />, { driver: driver(container) });
 
-    const [
-      firstRadio,
-      secondRadio,
-    ] = container.childNodes as NodeListOf<HTMLInputElement>;
+    const [firstRadio, secondRadio] =
+      container.childNodes as NodeListOf<HTMLInputElement>;
 
     expect(firstRadio.checked).toBe(true);
     expect(secondRadio.checked).toBe(false);
@@ -119,7 +109,7 @@ describe("firing input events", () => {
     const event = new CustomEvent("input", { detail: { target: secondRadio } });
     secondRadio.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("foo");
     expect(firstRadio.checked).toBe(true);

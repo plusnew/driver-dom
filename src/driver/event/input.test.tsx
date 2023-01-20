@@ -13,14 +13,11 @@ describe("firing input events", () => {
   it("is oninput called on text", () => {
     const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -35,7 +32,7 @@ describe("firing input events", () => {
     const event = new CustomEvent("input", { detail: { target: input } });
     input.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("bar");
 
@@ -43,20 +40,17 @@ describe("firing input events", () => {
     const eventTwo = new CustomEvent("change", { detail: { target: input } });
     input.dispatchEvent(eventTwo);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
   });
 
   it("is oninput called on number", () => {
     const local = store(0, (_state, newValue: number) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(Number(evt.currentTarget.value));
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(Number(evt.currentTarget.value));
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -71,27 +65,24 @@ describe("firing input events", () => {
     const event = new CustomEvent("input", { detail: { target: input } });
     input.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe(1);
 
     const eventTwo = new CustomEvent("change", { detail: { target: input } });
     input.dispatchEvent(eventTwo);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
   });
 
   it("is oninput called on explicit text", () => {
     const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "changex",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -106,14 +97,14 @@ describe("firing input events", () => {
     const event = new CustomEvent("input", { detail: { target: input } });
     input.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
 
     input.value = "barbar";
     const eventTwo = new CustomEvent("input", { detail: { target: input } });
     input.dispatchEvent(eventTwo);
 
-    expect(change.calls.count()).toEqual(2);
+    expect(change).toHaveBeenCalledTimes(2);
     expect(change).toHaveBeenCalledWith(eventTwo);
     expect(local.getState()).toBe("barbar");
   });
@@ -121,14 +112,11 @@ describe("firing input events", () => {
   it("is oninput called on checkbox", () => {
     const local = store(true, (_state, newValue: boolean) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.checked);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLInputElement }) => {
+        local.dispatch(evt.currentTarget.checked);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -143,7 +131,7 @@ describe("firing input events", () => {
     const event = new Event("input");
     input.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe(false);
   });

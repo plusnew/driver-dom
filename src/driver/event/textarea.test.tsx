@@ -13,14 +13,11 @@ describe("firing onchange events", () => {
   it("is onchange called on textarea, without revert", () => {
     const local = store("foo", (_state, newValue: string) => newValue);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLTextAreaElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -36,7 +33,7 @@ describe("firing onchange events", () => {
     const event = new CustomEvent("input", { detail: { target: textarea } });
     textarea.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("bar");
     expect(textarea.value).toBe("bar");
@@ -45,14 +42,11 @@ describe("firing onchange events", () => {
   it("is onchange called on textarea, with revert", () => {
     const local = store("foo", (state, _newValue: string) => state);
 
-    const change = jasmine
-      .createSpy(
-        "change",
-        (evt: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
-          local.dispatch(evt.currentTarget.value);
-        }
-      )
-      .and.callThrough();
+    const change = jest.fn(
+      (evt: Event & { currentTarget: HTMLTextAreaElement }) => {
+        local.dispatch(evt.currentTarget.value);
+      }
+    );
 
     const Component = component("Component", () => (
       <local.Observer>
@@ -68,7 +62,7 @@ describe("firing onchange events", () => {
     const event = new CustomEvent("input", { detail: { target: textarea } });
     textarea.dispatchEvent(event);
 
-    expect(change.calls.count()).toEqual(1);
+    expect(change).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledWith(event);
     expect(local.getState()).toBe("foo");
     expect(textarea.value).toBe("foo");

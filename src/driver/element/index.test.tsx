@@ -42,7 +42,7 @@ describe("element handling", () => {
     const rootElement = document.createElement("div");
 
     const local = store(true);
-    const clickSpy = jasmine.createSpy("clickspy");
+    const clickSpy = jest.fn();
 
     const MainComponent = component("Component", () => (
       <local.Observer>
@@ -67,11 +67,11 @@ describe("element handling", () => {
     expect(divContainer.childNodes[0].childNodes.length).toBe(2);
 
     const imgElement = divContainer.childNodes[0].childNodes[1];
-    const sourceElementRemoveSpy = spyOn(
+    const sourceElementRemoveSpy = jest.spyOn(
       divContainer.childNodes[0].childNodes[0],
       "remove"
     );
-    const imgElementRemoveSpy = spyOn(imgElement, "remove");
+    const imgElementRemoveSpy = jest.spyOn(imgElement, "remove");
 
     local.dispatch(false);
 
