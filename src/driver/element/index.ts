@@ -281,8 +281,9 @@ function setAttributeAsProperty(
     return keyName in domInstance.ref;
   } else {
     return (
-      domInstance.type === "input" &&
-      (keyName === "value" || keyName === "checked")
+      (domInstance.type === "input" &&
+        (keyName === "value" || keyName === "checked")) ||
+      (domInstance.type === "textarea" && keyName === "value")
     );
   }
 }

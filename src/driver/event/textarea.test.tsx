@@ -29,6 +29,8 @@ describe("firing onchange events", () => {
 
     const textarea = container.childNodes[0] as HTMLTextAreaElement;
 
+    expect(textarea.value).toBe("foo");
+
     textarea.value = "bar";
     const event = new CustomEvent("input", { detail: { target: textarea } });
     textarea.dispatchEvent(event);
@@ -57,6 +59,8 @@ describe("firing onchange events", () => {
     plusnew.render(<Component />, { driver: driver(container) });
 
     const textarea = container.childNodes[0] as HTMLTextAreaElement;
+
+    expect(textarea.value).toBe("foo");
 
     textarea.value = "bar";
     const event = new CustomEvent("input", { detail: { target: textarea } });
