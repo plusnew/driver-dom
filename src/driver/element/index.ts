@@ -194,7 +194,6 @@ function removeEventListener(
 }
 function registerInputWatcher(instance: HostInstance<Element, Text>) {
   const onchangeWrapper = (evt: Event) => {
-    let preventDefault = true;
     let changeKey: "value" | "checked" = "value";
     if (
       isCheckbox(instance.type, instance.props) ||
@@ -203,36 +202,18 @@ function registerInputWatcher(instance: HostInstance<Element, Text>) {
       changeKey = "checked";
     }
 
-    const originalSetProp = instance.setProp;
-    instance.setProp = (key, value) => {
-      if (key === changeKey) {
-        // When value property is the same as it is before, the value doesn't need to be set
-        if ((evt.target as HTMLInputElement)[changeKey] === value) {
-          preventDefault = false;
-        } else {
-          // If the value got changed, it needs to be set
-          preventDefault = true;
-        }
-      } else {
-        // every other property, which is not the one responsible for changing the value, should call the normal setProp behaviour
-        originalSetProp.call(instance, key, value);
-      }
-    };
+    const requestedValue = (evt.target as HTMLInputElement)[changeKey];
 
     if (instance.props.oninput) {
       (instance.props.oninput as EventListener)(evt);
     }
 
-    if (preventDefault === true) {
+    if (requestedValue !== instance.props[changeKey]) {
+      evt.preventDefault();
+
       ((instance.ref as HTMLInputElement)[changeKey] as any) =
         instance.props[changeKey];
     }
-
-    // When deleting this line, typescript thinks the property wouldn't exist anymore
-    // In reality we only remove it from this instance, and the setProp from the prototype-chain is still available
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    delete instance.setProp;
   };
 
   (instance.ref as HTMLInputElement).oninput = onchangeWrapper;
