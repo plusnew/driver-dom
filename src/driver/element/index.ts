@@ -30,7 +30,10 @@ const removeValues = [undefined, null];
 const element: IDriver<Element, Text>["element"] = {
   create: (domInstance) => {
     setNamespace(domInstance);
-    if (domInstance.renderOptions.xmlns) {
+    if (
+      domInstance.renderOptions.xmlns &&
+      domInstance.type.includes("-") === false
+    ) {
       return document.createElementNS(
         domInstance.renderOptions.xmlns,
         domInstance.type
