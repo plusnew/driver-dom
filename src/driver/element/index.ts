@@ -52,7 +52,7 @@ const element: IDriver<Element, Text>["element"] = {
       );
   },
   setAttribute: (domInstance, idlAttributeName, attributeValue) => {
-    if (removeValues.includes(attributeValue)) {
+    if (domInstance.type.includes("-") === false && removeValues.includes(attributeValue)) {
       element.unsetAttribute(domInstance, idlAttributeName);
     } else {
       if (idlAttributeName.indexOf(":") === -1) {
