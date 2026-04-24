@@ -179,10 +179,12 @@ function addEventListener(
     if (instance.props[attributeName]) {
       removeEventListener(instance, attributeName);
     }
-    (instance.ref as any).addEventListener(
-      getEventName(attributeName),
-      listener
-    );
+    if(typeof listener === "function") {
+      (instance.ref as any).addEventListener(
+        getEventName(attributeName),
+        listener
+      );
+    }
   }
 }
 
