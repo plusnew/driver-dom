@@ -27,19 +27,25 @@ function insertAfter(
 
 const removeValues = [undefined, null];
 
+function isWebcomponent(type: string | Element){
+  return typeof type !== "string" || type.includes("-");
+}
+
 const element: IDriver<Element, Text>["element"] = {
   create: (domInstance) => {
     setNamespace(domInstance);
     if (
       domInstance.renderOptions.xmlns &&
-      domInstance.type.includes("-") === false
+      isWebcomponent(domInstance.type) === false
     ) {
       return document.createElementNS(
         domInstance.renderOptions.xmlns,
         domInstance.type
       );
     }
-    return document.createElement(domInstance.type);
+    return typeof domInstance.type === "string"
+      ? document.createElement(domInstance.type)
+      : new (domInstance.type as any);
   },
   remove: (domInstance) => {
     domInstance.ref.remove();
@@ -52,7 +58,7 @@ const element: IDriver<Element, Text>["element"] = {
       );
   },
   setAttribute: (domInstance, idlAttributeName, attributeValue) => {
-    if (domInstance.type.includes("-") === false && removeValues.includes(attributeValue)) {
+    if (isWebcomponent(domInstance.type) === false && removeValues.includes(attributeValue)) {
       element.unsetAttribute(domInstance, idlAttributeName);
     } else {
       if (idlAttributeName.indexOf(":") === -1) {
@@ -261,9 +267,8 @@ function setAttributeAsProperty(
   domInstance: HostInstance<Element, Text>,
   keyName: string
 ): keyName is "checked" | "value" {
-  const isCustomElement = domInstance.type.indexOf("-") !== -1;
 
-  if (isCustomElement) {
+  if (isWebcomponent(domInstance.type) ) {
     return keyName in domInstance.ref;
   } else {
     return (
